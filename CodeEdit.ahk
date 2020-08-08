@@ -23,8 +23,8 @@ CoordMode,caret,Screen
 
 googlSearch := "https://www.google.com/search?q="
 amazonSerch := "https://www.amazon.co.jp/s?k="
-deeplSerch := "https://www.deepl.com/translator#"
-googleTransSerch := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
+deeplTrans := "https://www.deepl.com/translator#"
+googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 waitTime := 0.3
 sleepTime := 100 ; 挙動がおかしいときはsleep時間を調整する
@@ -362,9 +362,9 @@ MouseWheel(direction){
 ; 選択した文字を翻訳する
 ~VK1D & t::
     if GetKeyState("VK1C"){
-        run,% googleTransSerch TransParameter("ja&text=","en&text=")
+        run,% googleTrans TransParameter("ja&text=","en&text=")
     }Else{
-        run,% deeplSerch TransParameter("en/ja/","ja/en/")
+        run,% deeplTrans TransParameter("en/ja/","ja/en/")
     }
     Return
 
