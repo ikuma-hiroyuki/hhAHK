@@ -189,21 +189,21 @@ autoWinReSize(){
         Gosub,Large
     }Else If (InStr(winTitle,"Dynalist")>0) {
         Gosub,Tate
-    }Else If (WinActive("ahk_exe Code.exe")) { ;vs code
+    }Else If WinActive("ahk_exe Code.exe") { ;vs code
         Gosub,Large
-    }Else If (WinActive("ahk_exe studio64.exe")) { ;android studio
+    }Else If WinActive("ahk_exe studio64.exe") { ;android studio
         Gosub,Large
-    }Else If (WinActive("ahk_class MozillaWindowClass")) {
+    }Else If WinActive("ahk_class MozillaWindowClass") {
         Gosub,Tate
-    }Else If (WinActive("ahk_class XLMAIN")) { ;excel
+    }Else If WinActive("ahk_class XLMAIN") { ;excel
         Gosub,Fhd
-    }Else If (WinActive("ahk_class wndclass_desked_gsk")) { ;vbe
+    }Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
         Gosub,Fhd
-    }Else If (WinActive("ahk_exe wdexpress.exe")) { ;visual studio
+    }Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
         Gosub,Large
-    }Else If (WinActive("ahk_exe Explorer.EXE")) {
+    }Else If WinActive("ahk_exe Explorer.EXE") {
         Gosub,Small
-    }Else If (WinActive("ahk_exe SearchUI.exe")) { ;windows検索
+    }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
     }Else {
         Gosub,Yoko 
@@ -267,23 +267,27 @@ WinResize(x,y){
 ~VK1D & e::winMoveCenter()
 winMoveCenter(){
     WinGetPos,x,y,appWidth,appHeight,A
-    appWidth := appWidth/2
-    appHeight := appHeight/2
-    x := (A_ScreenWidth/2) - appWidth
-    y := (A_ScreenHeight/2) - appheight
+    appWidth := appWidth / 2
+    appHeight := appHeight / 2
+    x := (A_ScreenWidth / 2) - appWidth
+    y := (A_ScreenHeight / 2) - appheight
     WinMove,A,,x,y
 }
 
 ; window移動
-~VK1D & Left::WindowMove(-100,0)
-~VK1D & Right::WindowMove(100,0)
-~VK1D & Up::WindowMove(0,-100)
-~VK1D & Down::WindowMove(0,100)
+~VK1D & Left::WindowMove(-25,0)
+~VK1D & Right::WindowMove(25,0)
+~VK1D & Up::WindowMove(0,-25)
+~VK1D & Down::WindowMove(0,25)
 
-WindowMove(move_x,move_y) {
+WindowMove(moveX,moveY) {
     WinGetPos,x,y,,,A
-    x:= x + move_x
-    y:= y + move_y
+    if GetKeyState("vk1c"){
+        moveX := moveX * 5
+        moveY := moveY * 5
+    }
+    x := x + moveX
+    y := y + moveY
     WinMove,A,,x,y
 }
 
@@ -304,7 +308,7 @@ WindowMove(move_x,move_y) {
 ~VK1C & /::MouseCursorMove(0,10) ;↓
 
 MouseCursorMove(x,y){
-    If GetKeyState("Alt"){
+    If GetKeyState("vk1d"){
         cursorSpeed := 10
         x := x * cursorSpeed
         y := y * cursorSpeed
@@ -318,7 +322,7 @@ MouseCursorMove(x,y){
 
 MouseWheel(direction){
     wheelSpeed := 1
-    If GetKeyState("Alt"){
+    If GetKeyState("vk1c"){
         wheelSpeed := 3
     }
     If (direction = "U")
