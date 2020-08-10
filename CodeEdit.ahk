@@ -176,7 +176,7 @@ SymbolSandwich(p1,p2){
 
 ;ウィンドウサイズ変更
 ~VK1D & w Up::
-    if GetKeyState("Shift"){
+    if GetKeyState("vk1c"){
         viewWinsizeMenu()
     }Else{
         autoWinReSize()
