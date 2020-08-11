@@ -317,6 +317,7 @@ MouseCursorMove(x,y){
 }
 
 ~VK1C & l::Click,Left
+~VK1C & r::Click,Right
 ~VK1C & k::MouseWheel("U")
 ~VK1C & j::MouseWheel("D")
 
