@@ -212,8 +212,8 @@ autoWinReSize(){
 
 viewWinsizeMenu(){
     WinGetPos,x,y,,,A
-    x := x + 20
-    y := y + 10
+    x += 20
+    y += 10
     Menu,rSize,add,&Mini, Mini
     Menu,rSize,add,&Small, Small
     Menu,rSize,add,&Tate, Tate
@@ -267,8 +267,8 @@ WinResize(x,y){
 ~VK1D & e::winMoveCenter()
 winMoveCenter(){
     WinGetPos,x,y,appWidth,appHeight,A
-    appWidth := appWidth / 2
-    appHeight := appHeight / 2
+    appWidth /= 2
+    appHeight /= 2
     x := (A_ScreenWidth / 2) - appWidth
     y := (A_ScreenHeight / 2) - appheight
     WinMove,A,,x,y
@@ -283,11 +283,11 @@ winMoveCenter(){
 WindowMove(moveX,moveY) {
     WinGetPos,x,y,,,A
     if GetKeyState("shift"){
-        moveX := moveX * 5
-        moveY := moveY * 5
+        moveX *= 5
+        moveY *= 5
     }
-    x := x + moveX
-    y := y + moveY
+    x += moveX
+    y += moveY
     WinMove,A,,x,y
 }
 
@@ -310,8 +310,8 @@ WindowMove(moveX,moveY) {
 MouseCursorMove(x,y){
     If GetKeyState("shift"){
         cursorSpeed := 10
-        x := x * cursorSpeed
-        y := y * cursorSpeed
+        x *= cursorSpeed
+        y *= cursorSpeed
     }
     MouseClick,Left,x,y,1,0,U,R
 }
