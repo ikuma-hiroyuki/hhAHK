@@ -176,7 +176,7 @@ SymbolSandwich(p1,p2){
 
 ;ウィンドウサイズ変更
 ~VK1D & w Up::
-    if GetKeyState("vk1c"){
+    if GetKeyState("shift"){
         viewWinsizeMenu()
     }Else{
         autoWinReSize()
@@ -282,7 +282,7 @@ winMoveCenter(){
 
 WindowMove(moveX,moveY) {
     WinGetPos,x,y,,,A
-    if GetKeyState("vk1c"){
+    if GetKeyState("shift"){
         moveX := moveX * 5
         moveY := moveY * 5
     }
@@ -308,7 +308,7 @@ WindowMove(moveX,moveY) {
 ~VK1C & /::MouseCursorMove(0,10) ;↓
 
 MouseCursorMove(x,y){
-    If GetKeyState("vk1d"){
+    If GetKeyState("shift"){
         cursorSpeed := 10
         x := x * cursorSpeed
         y := y * cursorSpeed
@@ -323,7 +323,7 @@ MouseCursorMove(x,y){
 
 MouseWheel(direction){
     wheelSpeed := 1
-    If GetKeyState("vk1c"){
+    If GetKeyState("shift"){
         wheelSpeed := 3
     }
     If (direction = "U")
