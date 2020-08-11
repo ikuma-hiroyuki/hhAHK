@@ -366,7 +366,7 @@ MouseWheel(direction){
 ~vk1d & a::run,% amazonSerch GetSelectionString()
 ; 選択した文字を翻訳する
 ~VK1D & t::
-    if GetKeyState("VK1C"){
+    if GetKeyState("shift"){
         run,% googleTrans TransParameter("ja&text=","en&text=")
     }Else{
         run,% deeplTrans TransParameter("en/ja/","ja/en/")
