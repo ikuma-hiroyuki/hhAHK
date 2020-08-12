@@ -253,7 +253,6 @@ Return
 WinResize(x,y){
     WinRestore,A
     WinMove,A,,,,x,y
-    Reload
 }
 
 ;ウィンドウを画面中央に移動する
