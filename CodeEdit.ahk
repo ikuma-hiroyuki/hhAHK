@@ -147,20 +147,17 @@ Return
 SymbolSandwich(p1,p2){ 
     global waitTime
 	saveClip := Clipboard
-	Clipboard := ""
-	Send, ^c
-	ClipWait,% waitTime ; 挙動がおかしいときはwait時間を調整する
-    If InStr(Clipboard,"`r`n") > 0 or (Clipboard = "") {
+    selectionString := GetSelectionString(false)
+    If InStr(selectionString,"`r`n") > 0 or (selectionString = "") {
         ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
         send,% p1 p2
-        Send,{Left}
+        Send,{Left} 
     } Else {
         send,{delete}
-        send,% p1 Clipboard p2
+        send,% p1 selectionString p2
     }
 	Clipboard := saveClip
 }
-
 ;ウィンドウ操作====================================================================================================
 ~VK1D & 4::!F4
 
@@ -353,9 +350,9 @@ MouseWheel(direction){
 ;ブラウザで検索する====================================================================================================
 
 ; 選択した文字をgoogle検索する
-~vk1d & s::run,% googlSearch GetSelectionString()
+~vk1d & s::run,% googlSearch GetSelectionString(true)
 ; 選択した文字をAmazon検索する
-~vk1d & a::run,% amazonSerch GetSelectionString()
+~vk1d & a::run,% amazonSerch GetSelectionString(true)
 ; 選択した文字を翻訳する
 ~VK1D & t::
     if GetKeyState("shift"){
@@ -365,19 +362,21 @@ MouseWheel(direction){
     }
     Return
 
-GetSelectionString(){
+GetSelectionString(replace){
     Clipboard := ""
     Send,^c
     global waitTime
     ClipWait, % waitTime
     query := Clipboard
-    query := StrReplace(query, A_Space , "`%20")
-    query := StrReplace(query, "`r`n" , "%0A")
+    if replace {
+        query := StrReplace(query, A_Space , "`%20")
+        query := StrReplace(query, "`r`n" , "%0A")
+    }
     Return query
 }
 
 TransParameter(waei,eiwa){
-    clip := GetSelectionString()
+    clip := GetSelectionString(true)
     matchCount := RegExMatch(StrReplace(clip,"`%0A"), "[a-zA-Z]")
     If (matchCount > 0) {
         Return waei clip
@@ -387,7 +386,7 @@ TransParameter(waei,eiwa){
 }
 
 ; everythingで検索
-#S::run,% everythingCommand GetSelectionString()
+#S::run,% everythingCommand GetSelectionString(true)
 
 ;Explorer====================================================================================================
 #IfWinActive,ahk_exe Explorer.EXE
