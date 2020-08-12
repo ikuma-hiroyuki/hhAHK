@@ -250,9 +250,9 @@ YoutubeThumbnail:
     WinResize(1280,720)
 Return
 
-WinResize(x,y){
+WinResize(width,height){
     WinRestore,A
-    WinMove,A,,,,x,y
+    WinMove,A,,,,width,height
 }
 
 ;ウィンドウを画面中央に移動する
