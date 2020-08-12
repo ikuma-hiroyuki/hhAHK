@@ -27,7 +27,6 @@ deeplTrans := "https://www.deepl.com/translator#"
 googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 waitTime := 0.3
-sleepTime := 100 ; 挙動がおかしいときはsleep時間を調整する
 
 
 ; 汎用関数====================================================================================================
@@ -147,7 +146,6 @@ inp:
 Return
 
 SymbolSandwich(p1,p2){
-    global sleeptime
     global waitTime
 
 	saveClip := Clipboard
@@ -156,14 +154,11 @@ SymbolSandwich(p1,p2){
 	ClipWait,% waitTime ; 挙動がおかしいときはwait時間を調整する
     If InStr(Clipboard,"`r`n") > 0 or (Clipboard = "") {
         ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        Clipboard := p1 p2
-    	Send, ^v
-        Sleep,% sleeptime
+        send,% p1 p2
         Send,{Left}
-    } Else { 
-        Clipboard := p1 Clipboard p2
-    	Send, ^v
-        Sleep,% sleeptime
+    } Else {
+        send,{delete}
+        send,% p1 Clipboard p2
     }
 	Clipboard := saveClip
 }
