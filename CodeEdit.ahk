@@ -133,7 +133,6 @@ kbd:
 Return
 
 inp:
-    Send,{vk1d}
     InputBox,val,任意文字,`,で前後を区別,,150,120
     If (ErrorLevel = 0) { ;OKが押された
         StringSplit,ary,val,"`,",% A_Space
@@ -147,7 +146,6 @@ Return
 
 SymbolSandwich(p1,p2){
     global waitTime
-
 	saveClip := Clipboard
 	Clipboard := ""
 	Send, ^c
