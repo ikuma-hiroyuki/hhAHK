@@ -97,7 +97,7 @@ doubleQuotation:
 Return
 
 curlyBrackets:
-    SymbolSandwich("{","}")
+    SymbolSandwich("{{}","{}}")
 Return
 
 squareBrackets:
@@ -144,7 +144,7 @@ inp:
     }
 Return
 
-SymbolSandwich(p1,p2){
+SymbolSandwich(p1,p2){ 
     global waitTime
 	saveClip := Clipboard
 	Clipboard := ""
