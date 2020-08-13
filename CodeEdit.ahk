@@ -145,9 +145,8 @@ inp:
 Return
 
 SymbolSandwich(p1,p2){ 
-    global waitTime
 	saveClip := Clipboard
-    selectionString := GetSelectionString(false)
+    selectionString := GetSelectionString()
     If InStr(selectionString,"`r`n") > 0 or (selectionString = "") {
         ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
         send,% p1 p2
@@ -350,9 +349,9 @@ MouseWheel(direction){
 ;ブラウザで検索する====================================================================================================
 
 ; 選択した文字をgoogle検索する
-~vk1d & s::run,% googlSearch GetSelectionString()
+~vk1d & s::run,% googlSearch GetSelectionString(true)
 ; 選択した文字をAmazon検索する
-~vk1d & a::run,% amazonSerch GetSelectionString()
+~vk1d & a::run,% amazonSerch GetSelectionString(true)
 ; 選択した文字を翻訳する
 ~VK1D & t::
     if GetKeyState("shift"){
@@ -362,7 +361,7 @@ MouseWheel(direction){
     }
     Return
 
-GetSelectionString(replace := true) {
+GetSelectionString(replace := false) {
     Clipboard := ""
     Send,^c
     global waitTime
@@ -376,7 +375,7 @@ GetSelectionString(replace := true) {
 }
 
 TransParameter(waei,eiwa){
-    clip := GetSelectionString()
+    clip := GetSelectionString(true)
     matchCount := RegExMatch(StrReplace(clip,"`%0A"), "[a-zA-Z]")
     If (matchCount > 0) {
         Return waei clip
@@ -388,11 +387,14 @@ TransParameter(waei,eiwa){
 ; everythingで検索
 #S::run,% everythingCommand GetSelectionString()
 
-;Explorer====================================================================================================
-#IfWinActive,ahk_exe Explorer.EXE
-    F1::Send,!vsf
-#IfWinActive
-
+F1::
+    if WinActive("ahk_exe Explorer.EXE"){
+        send,!vsf
+    }else{
+        send,{F1}
+    }
+    Return
+    
 ;VBE====================================================================================================
 #IfWinActive,ahk_class wndclass_desked_gsk 
     ; & _
