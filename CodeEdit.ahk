@@ -26,7 +26,7 @@ amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
 googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
-waitTime := 0.3
+waitTime := 0.2
 
 
 ; 汎用関数====================================================================================================
@@ -349,7 +349,7 @@ MouseWheel(direction){
 ;ブラウザで検索する====================================================================================================
 
 ; 選択した文字をgoogle検索する
-~vk1d & g::run,% googlSearch GetSelectionString(true)
+~vk1d & s::run,% googlSearch GetSelectionString(true)
 ; 選択した文字をAmazon検索する
 ~vk1d & a::run,% amazonSerch GetSelectionString(true)
 ; 選択した文字を翻訳する
@@ -385,7 +385,7 @@ TransParameter(waei,eiwa){
 }
 
 ; everythingで検索
-~VK1D & s::run,% everythingCommand GetSelectionString()
+#S::run,% everythingCommand GetSelectionString()
 
 F1::
     if WinActive("ahk_exe Explorer.EXE"){
