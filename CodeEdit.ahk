@@ -349,7 +349,7 @@ MouseWheel(direction){
 ;ブラウザで検索する====================================================================================================
 
 ; 選択した文字をgoogle検索する
-~vk1d & s::run,% googlSearch GetSelectionString(true)
+~vk1d & g::run,% googlSearch GetSelectionString(true)
 ; 選択した文字をAmazon検索する
 ~vk1d & a::run,% amazonSerch GetSelectionString(true)
 ; 選択した文字を翻訳する
@@ -385,7 +385,7 @@ TransParameter(waei,eiwa){
 }
 
 ; everythingで検索
-#S::run,% everythingCommand GetSelectionString()
+~VK1D & s::run,% everythingCommand GetSelectionString()
 
 F1::
     if WinActive("ahk_exe Explorer.EXE"){
