@@ -350,9 +350,9 @@ MouseWheel(direction){
 ;ブラウザで検索する====================================================================================================
 
 ; 選択した文字をgoogle検索する
-~vk1d & s::run,% googlSearch GetSelectionString(true)
+~vk1d & s::run,% googlSearch GetSelectionString()
 ; 選択した文字をAmazon検索する
-~vk1d & a::run,% amazonSerch GetSelectionString(true)
+~vk1d & a::run,% amazonSerch GetSelectionString()
 ; 選択した文字を翻訳する
 ~VK1D & t::
     if GetKeyState("shift"){
@@ -362,7 +362,7 @@ MouseWheel(direction){
     }
     Return
 
-GetSelectionString(replace){
+GetSelectionString(replace := true) {
     Clipboard := ""
     Send,^c
     global waitTime
@@ -376,7 +376,7 @@ GetSelectionString(replace){
 }
 
 TransParameter(waei,eiwa){
-    clip := GetSelectionString(true)
+    clip := GetSelectionString()
     matchCount := RegExMatch(StrReplace(clip,"`%0A"), "[a-zA-Z]")
     If (matchCount > 0) {
         Return waei clip
@@ -386,7 +386,7 @@ TransParameter(waei,eiwa){
 }
 
 ; everythingで検索
-#S::run,% everythingCommand GetSelectionString(true)
+#S::run,% everythingCommand GetSelectionString()
 
 ;Explorer====================================================================================================
 #IfWinActive,ahk_exe Explorer.EXE
