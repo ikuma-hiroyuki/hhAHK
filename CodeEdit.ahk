@@ -362,9 +362,9 @@ MouseWheel(direction){
     Return
 
 GetSelectionString(replace := false) {
+    global waitTime
     Clipboard := ""
     Send,^c
-    global waitTime
     ClipWait, % waitTime
     query := Clipboard
     if replace {
