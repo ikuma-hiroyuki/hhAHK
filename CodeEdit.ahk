@@ -26,7 +26,8 @@ amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
 googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
-waitTime := 0.2
+waitTime := 0.2 ; second
+sleepTime := 100 ; millisecond
 
 
 ; 汎用関数=======================================================================================
@@ -145,18 +146,23 @@ inp:
 Return
 
 SymbolSandwich(p1,p2){ 
+    global sleepTime
 	saveClip := Clipboard
     selectionString := GetSelectionString()
-    If InStr(selectionString,"`r`n") > 0 or (selectionString = "") {
-        ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        send,% p1 p2
-        Send,{Left} 
+    isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
+    If isCrCf { ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
+        Clipboard := p1 p2
     } Else {
-        send,{delete}
-        send,% p1 selectionString p2
+        Clipboard := p1 selectionString p2
+    }
+    send,^v
+    sleep, % sleepTime ; sleepしないとうまく出力されない
+    if isCrCf {
+        Send,{Left} 
     }
 	Clipboard := saveClip
 }
+
 ;ウィンドウ操作==================================================================================
 ~VK1D & 4::!F4
 
@@ -414,4 +420,4 @@ TransParameter(waei,eiwa){
     
     ;倍率テキストボックスにフォーカス
     ~VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
-#IfWinActive 
+#IfWinActive
