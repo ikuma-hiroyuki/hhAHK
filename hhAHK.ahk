@@ -18,7 +18,6 @@ sc033 = ,
 SendMode Input
 SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
-CoordMode,menu,Screen
 CoordMode,caret,Screen
 
 googlSearch := "https://www.google.com/search?q="
@@ -206,9 +205,9 @@ autoWinReSize(){
 }
 
 viewWinsizeMenu(){
-    WinGetPos,x,y,,,A
-    x += 20
-    y += 10
+    WinGetPos, , , appWidth, appHeight, A
+    appHeight /= 2
+    appWidth /= 2
     Menu,rSize,add,&Mini, Mini
     Menu,rSize,add,&Small, Small
     Menu,rSize,add,&Tate, Tate
@@ -217,7 +216,7 @@ viewWinsizeMenu(){
     Menu,rSize,add,F&HD, Fhd
     Menu,rSize,add,&FullSize, FullSize
     Menu,rSize,add,Y&utube,YoutubeThumbnail
-    Menu,rSize,Show,% x,% y
+    Menu,rSize,Show, % appWidth, % appHeight - 100
 }
 
 Mini:
