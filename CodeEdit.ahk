@@ -29,7 +29,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 waitTime := 0.2
 
 
-; 汎用関数====================================================================================================
+; 汎用関数=======================================================================================
 keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
     keyWait,% key,T0.3
     if (ErrorLevel = 1) {
@@ -43,7 +43,7 @@ keyRenda(proc) {
     }
 }
 
-;ユーティリティ====================================================================================================
+;ユーティリティ==================================================================================
 
 ~VK1D & 0::RelodCommand()
 ~VK1C & 0::RelodCommand()
@@ -62,7 +62,7 @@ RelodCommand(){
 ;コンテキストメニュー表示
 ~VK1D & r::Send,+{F10}
 
-;記号入力====================================================================================================
+;記号入力=======================================================================================
 ~VK1D & 2 Up::Gosub,doubleQuotation ;""
 ~VK1D & 3 Up::Gosub,sharp ;##
 ~VK1D & 7 Up::Gosub,singleQuotation ;''
@@ -157,7 +157,7 @@ SymbolSandwich(p1,p2){
     }
 	Clipboard := saveClip
 }
-;ウィンドウ操作====================================================================================================
+;ウィンドウ操作==================================================================================
 ~VK1D & 4::!F4
 
 ; ウィンドウ最小化
@@ -279,7 +279,7 @@ WindowMove(moveX,moveY) {
     WinMove,A,,x,y
 }
 
-;カーソル移動====================================================================================================
+;カーソル移動====================================================================================
 ~VK1D & sc027::Send,{Blind}{Left}	; ;
 ~VK1D & sc028::Send,{Blind}{Right}	; :
 ~VK1D & @::Send,{Blind}{Up}
@@ -289,7 +289,7 @@ WindowMove(moveX,moveY) {
 ~VK1D & k::Send,{Blind}{Home}
 ~VK1D & ,::Send,{Blind}{End}
 
-;マウス操作====================================================================================================
+;マウス操作======================================================================================
 ~VK1C & sc027::MouseCursorMove(-10,0) ;← ;キー
 ~VK1C & sc028::MouseCursorMove(10,0) ;→ ]キー
 ~VK1C & @::MouseCursorMove(0,-10) ;↑
@@ -320,7 +320,7 @@ MouseWheel(direction){
         Click,WheelDown,,,wheelSpeed
 }
 
-;文字列操作====================================================================================================
+;文字列操作======================================================================================
 
 ;キー連打でエンターキー
 ; ~LShift Up::keyRenda(Func("sendEnterkey"))
@@ -346,7 +346,7 @@ MouseWheel(direction){
 ~VK1D & f::send,{Enter}
 
 
-;ブラウザで検索する====================================================================================================
+;ブラウザで検索する==============================================================================
 
 ; 選択した文字をgoogle検索する
 ~vk1d & s::run,% googlSearch GetSelectionString(true)
@@ -387,30 +387,25 @@ TransParameter(waei,eiwa){
 ; everythingで検索
 #S::run,% everythingCommand GetSelectionString()
 
-F1::
-    if WinActive("ahk_exe Explorer.EXE"){
-        send,!vsf
-    }else{
-        send,{F1}
-    }
-    Return
-    
-;VBE====================================================================================================
-#IfWinActive,ahk_class wndclass_desked_gsk 
+#IFWinActive ahk_exe Explorer.EXE
+    F1::send,!vsf
+#IFWinActive
+
+;VBE=============================================================================================
+#IfWinActive ahk_class wndclass_desked_gsk
     ; & _
     ~VK1D & 6::Send,{Space}{&}{Space}{_}
     
     ;Ctrl + G → Del → F7
     ~VK1D & g::Send,^g^a{Del}{F7}
-    
-#IfWinActive
+#IfWinActive 
 
-#IfWinActive,ahk_class VBFloatingPalette
+#IfWinActive ahk_class VBFloatingPalette
     ~VK1D & g::Send,^a{Del}{F7}
-#IfWinActive
+#IfWinActive 
 
-;CamtasiaStudio====================================================================================================
-#IfWinActive,ahk_exe CamtasiaStudio.exe
+;CamtasiaStudio===================================================================================
+#IfWinActive ahk_exe CamtasiaStudio.exe
     ;ステッチ
     ~VK1D & s::Send,^!i
     
@@ -419,4 +414,4 @@ F1::
     
     ;倍率テキストボックスにフォーカス
     ~VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
-#IfWinActive
+#IfWinActive 
