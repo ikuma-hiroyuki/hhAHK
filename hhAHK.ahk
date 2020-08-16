@@ -144,7 +144,7 @@ inp:
     }
 Return
 
-SymbolSandwich(p1,p2){ 
+SymbolSandwich(p1,p2){
     global sleepTime
 	saveClip := Clipboard
     selectionString := GetSelectionString()
@@ -157,7 +157,7 @@ SymbolSandwich(p1,p2){
     send,^v
     sleep, % sleepTime ; sleepしないとうまく出力されない
     if isCrCf {
-        Send,{Left} 
+        Send,{Left}
     }
 	Clipboard := saveClip
 }
@@ -170,7 +170,7 @@ SymbolSandwich(p1,p2){
 
 ;ウィンドウサイズ変更
 ~VK1D & w Up::
-    if GetKeyState("shift"){
+    if GetKeyState("vk1c"){
         viewWinsizeMenu()
     }Else{
         autoWinReSize()
@@ -200,23 +200,20 @@ autoWinReSize(){
     }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
     }Else {
-        Gosub,Yoko 
+        Gosub,Yoko
     }
 }
 
 viewWinsizeMenu(){
     WinGetPos, , , appWidth, appHeight, A
-    appHeight /= 2
-    appWidth /= 2
     Menu,rSize,add,&Mini, Mini
     Menu,rSize,add,&Small, Small
     Menu,rSize,add,&Tate, Tate
     Menu,rSize,add,&Yoko, Yoko
     Menu,rSize,add,&Large, Large
     Menu,rSize,add,F&HD, Fhd
-    Menu,rSize,add,&FullSize, FullSize
     Menu,rSize,add,Y&utube,YoutubeThumbnail
-    Menu,rSize,Show, % appWidth, % appHeight - 100
+    Menu,rSize,Show, % appWidth / 2 - 100 , % appHeight / 2 - 100
 }
 
 Mini:
@@ -241,10 +238,6 @@ Return
 
 Fhd:
     WinResize(1920,1080)
-Return
-
-FullSize:
-    WinMaximize,A
 Return
 
 YoutubeThumbnail:
@@ -275,7 +268,7 @@ winMoveCenter(){
 
 WindowMove(moveX,moveY) {
     WinGetPos,x,y,,,A
-    if GetKeyState("shift"){
+    if GetKeyState("ctrl"){
         moveX *= 5
         moveY *= 5
     }
@@ -301,7 +294,7 @@ WindowMove(moveX,moveY) {
 ~VK1C & /::MouseCursorMove(0,10) ;↓
 
 MouseCursorMove(x,y){
-    If GetKeyState("shift"){
+    If GetKeyState("ctrl"){
         cursorSpeed := 10
         x *= cursorSpeed
         y *= cursorSpeed
@@ -316,7 +309,7 @@ MouseCursorMove(x,y){
 
 MouseWheel(direction){
     wheelSpeed := 1
-    If GetKeyState("shift"){
+    If GetKeyState("ctrl"){
         wheelSpeed := 3
     }
     If (direction = "U")
@@ -359,7 +352,7 @@ MouseWheel(direction){
 ~vk1d & a::run,% amazonSerch GetSelectionString(true)
 ; 選択した文字を翻訳する
 ~VK1D & t::
-    if GetKeyState("shift"){
+    if GetKeyState("ctrl"){
         run,% googleTrans TransParameter("ja&text=","en&text=")
     }Else{
         run,% deeplTrans TransParameter("en/ja/","ja/en/")
@@ -400,23 +393,23 @@ TransParameter(waei,eiwa){
 #IfWinActive ahk_class wndclass_desked_gsk
     ; & _
     ~VK1D & 6::Send,{Space}{&}{Space}{_}
-    
+
     ;Ctrl + G → Del → F7
     ~VK1D & g::Send,^g^a{Del}{F7}
-#IfWinActive 
+#IfWinActive
 
 #IfWinActive ahk_class VBFloatingPalette
     ~VK1D & g::Send,^a{Del}{F7}
-#IfWinActive 
+#IfWinActive
 
 ;CamtasiaStudio===================================================================================
 #IfWinActive ahk_exe CamtasiaStudio.exe
     ;ステッチ
     ~VK1D & s::Send,^!i
-    
+
     ;リップル削除
     ~VK1D & d::Send,^{delete}
-    
+
     ;倍率テキストボックスにフォーカス
     ~VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
 #IfWinActive
