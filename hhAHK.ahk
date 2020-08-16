@@ -53,7 +53,6 @@ RelodCommand(){
     Sleep, 1000
     ToolTip
     Reload
-    Return
 }
 
 ;クリップボード履歴
@@ -304,19 +303,9 @@ MouseCursorMove(x,y){
 
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
-~VK1C & k::MouseWheel("U")
-~VK1C & j::MouseWheel("D")
+~VK1C & k::Click,WheelUp
+~VK1C & j::Click,WheelDown,,,wheelSpeed
 
-MouseWheel(direction){
-    wheelSpeed := 1
-    If GetKeyState("ctrl"){
-        wheelSpeed := 3
-    }
-    If (direction = "U")
-        Click,WheelUp,,,wheelSpeed
-    Else If (direction = "D")
-        Click,WheelDown,,,wheelSpeed
-}
 
 ;文字列操作======================================================================================
 
