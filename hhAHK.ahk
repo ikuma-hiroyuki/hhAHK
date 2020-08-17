@@ -151,16 +151,22 @@ SymbolSandwich(p1,p2){
     selectionString := GetSelectionString()
     isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
     If isCrCf { ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        Clipboard := p1 p2
+        ClipPast(p1 p2)
     } Else {
-        Clipboard := p1 selectionString p2
+        ClipPast(p1 selectionString p2)
     }
-    send,^v
-    sleep, % sleepTime ; sleepしないとうまく出力されない
     if isCrCf {
         Send,{Left}
     }
 	Clipboard := saveClip
+}
+
+ClipPast(string){
+    global sleepTime
+    Clipboard := string
+    send,^v
+    sleep, % sleepTime ; sleepしないとうまく出力されない
+    Clipboard := saveClip
 }
 
 ;ウィンドウ操作==================================================================================
@@ -338,9 +344,7 @@ MouseCursorMove(x,y){
 !sc027::
     currentClip := Clipboard
     FormatTime,timeString,,% "yyyy/MM/dd"
-    Clipboard := timeString
-    send,^v
-    sleep, % sleepTime ; sleepしないとうまく出力されない
+    ClipPast(timeString)
     Clipboard := currentClip
     Return
 
