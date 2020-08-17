@@ -20,6 +20,8 @@ SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
+#Include, IME.ahk
+
 googlSearch := "https://www.google.com/search?q="
 amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
@@ -332,6 +334,15 @@ MouseCursorMove(x,y){
 ;エンターキー
 ~VK1D & f::send,{Enter}
 
+;日付出力
+!sc027::
+    currentClip := Clipboard
+    FormatTime,timeString,,% "yyyy/MM/dd"
+    Clipboard := timeString
+    send,^v
+    sleep, % sleepTime ; sleepしないとうまく出力されない
+    Clipboard := currentClip
+    Return
 
 ;ブラウザで検索する==============================================================================
 
