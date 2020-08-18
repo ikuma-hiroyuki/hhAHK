@@ -20,7 +20,6 @@ SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
-
 googlSearch := "https://www.google.com/search?q="
 amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
@@ -46,15 +45,23 @@ keyRenda(proc) {
 
 ;ユーティリティ==================================================================================
 
-~VK1D & 0::RelodCommand()
-~VK1C & 0::RelodCommand()
+~VK1C & 0::
+    ToolTip, % "Reload"
+    SetTimer, reloadLabel, 1000
+    return
 
-RelodCommand(){
-    ToolTip, Reload
-    Sleep, 1000
-    ToolTip
+reloadLabel:
     Reload
-}
+    tooltip
+    return
+
+~VK1C & 9::
+    ToolTip, % "Exit"
+    SetTimer, exitLabel, 1000
+    return
+exitLabel:
+    ExitApp
+    return
 
 ;クリップボード履歴
 ~VK1D & V::Send,#v
