@@ -20,7 +20,6 @@ SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
-#Include, IME.ahk
 
 googlSearch := "https://www.google.com/search?q="
 amazonSerch := "https://www.amazon.co.jp/s?k="
@@ -341,7 +340,7 @@ MouseCursorMove(x,y){
 ~VK1D & f::send,{Enter}
 
 ;日付出力
-!sc027::
+~vk1c & d::
     currentClip := Clipboard
     FormatTime,timeString,,% "yyyy/MM/dd"
     ClipPast(timeString)
