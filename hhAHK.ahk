@@ -349,7 +349,7 @@ MouseCursorMove(x,y){
 ;日付出力
 ~vk1c & d::
     currentClip := Clipboard
-    FormatTime,timeString,,% "yyyy/MM/dd"
+    FormatTime,timeString,,% "ShortDate"
     ClipPast(timeString)
     Clipboard := currentClip
     Return
