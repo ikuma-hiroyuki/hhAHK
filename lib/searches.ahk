@@ -1,4 +1,3 @@
-#Include, %A_ScriptDir%\lib\components.ahk
 
 SelectStrGoogleSerch(){
     SetWinDelay, 10
@@ -17,7 +16,8 @@ SelectStrDeepLTrans(){
 
 SelectStrGoogleTrans(){
     SetWinDelay, 10
-    run,% "https://translate.google.com/#view=home&op=translate&sl=auto&tl=" TransParameter("ja&text=","en&text=")
+    run,% "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
+          . TransParameter("ja&text=","en&text=")
 }
 
 TransParameter(waei,eiwa){

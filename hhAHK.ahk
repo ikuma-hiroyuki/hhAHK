@@ -11,21 +11,19 @@ sc028 = :
 sc033 = ,
 */
 
-#InstallKeybdHook
-#UseHook
 #NoEnv
+#UseHook
+#InstallKeybdHook
 #SingleInstance,Force
 
 SendMode Input
-SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
-sleepTime := 100 ; millisecond
-
-#Include, %A_ScriptDir%\lib\window_controller.ahk
 #Include, %A_ScriptDir%\lib\searches.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
+#Include, %A_ScriptDir%\lib\symbol_sand.ahk
+#Include, %A_ScriptDir%\lib\window_controller.ahk
 
 ~VK1C & 0::AhkReload()
 ~VK1C & 9::AhkExit()
@@ -52,112 +50,20 @@ sleepTime := 100 ; millisecond
 ;コンテキストメニュー表示
 ~VK1D & r::Send,+{F10}
 
-;記号入力
-~VK1D & 2 Up::Gosub,doubleQuotation ;""
-~VK1D & 3 Up::Gosub,sharp ;##
-~VK1D & 7 Up::Gosub,singleQuotation ;''
-~VK1D & 8 Up::Gosub,brackets ;括弧
-~VK1D & 5 Up::Gosub,percent ;%
-~VK1D & 9 Up::Gosub,kakko ;カギ括弧
+;記号ペア出力
+~VK1D & 2 Up::Gosub,doubleQuotation
+~VK1D & 3 Up::Gosub,hash
+~VK1D & 7 Up::Gosub,singleQuotation
+~VK1D & 8 Up::Gosub,roundBrackets
+~VK1D & 5 Up::Gosub,percent
+~VK1D & 9 Up::Gosub,kagikakko ;カギ括弧
 ~VK1D & [ Up::Gosub,squareBrackets ;角括弧
 ~VK1D & ] Up::Gosub,curlyBrackets ;波括弧
-~VK1D & i Up::Gosub,inp
-~VK1D & M Up:: ; メニュー表示
-    Menu,sand,add," "`t &2,	doubleQuotation
-    Menu,sand,add,# #`t &3,	sharp
-    Menu,sand,add,`% `%`t &5, percent
-    Menu,sand,add,' '`t &7,	singleQuotation
-    Menu,sand,add,( )`t &8,	brackets
-    Menu,sand,add,「 」`t &9,	kakko
-    Menu,sand,add,[ ]`t &[,	squareBrackets
-    Menu,sand,add,{ }`t &},	curlyBrackets
-    Menu,sand,add,< >`t &a,	arrow
-    Menu,sand,add,<kbd >`t &k,	kbd
-    Menu,sand,add,【】`t &s,	sumiKakko
-    Menu,sand,add,??`t &i,	inp
-    Menu,sand,Show,% A_CaretX, % A_CaretY + 25
-Return
+~VK1D & i Up::Gosub,inp ; 任意の文字
+~VK1D & M Up::ViewSandMenu()
 
-brackets:
-    SymbolSandwich("(",")")
-Return
 
-doubleQuotation:
-    SymbolSandwich("""","""")
-Return
-
-curlyBrackets:
-    SymbolSandwich("{{}","{}}")
-Return
-
-squareBrackets:
-    SymbolSandwich("[","]")
-Return
-
-sharp:
-    SymbolSandwich("#","#")
-Return
-
-percent:
-    SymbolSandwich("%","%")
-Return
-
-singleQuotation:
-    SymbolSandwich("'","'")
-Return
-
-kakko:
-    SymbolSandwich("「","」")
-Return
-
-arrow:
-    SymbolSandwich("<",">")
-Return
-
-sumiKakko:
-    SymbolSandwich("【","】")
-Return
-
-kbd:
-    SymbolSandwich("<kbd>","</kbd>")
-Return
-
-inp:
-    InputBox,val,任意文字,`,で前後を区別,,150,120
-    If (ErrorLevel = 0) { ;OKが押された
-        StringSplit,ary,val,"`,",% A_Space
-        If (ary0 = 2) {
-            SymbolSandwich(ary1,ary2)
-        } Else {
-            SymbolSandwich(val,val)
-        }
-    }
-Return
-
-SymbolSandwich(p1,p2){
-	saveClip := Clipboard
-    selectionString := GetSelectionString()
-    isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
-    If isCrCf { ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        ClipPast(p1 p2)
-    } Else {
-        ClipPast(p1 selectionString p2)
-    }
-    if isCrCf {
-        Send,{Left}
-    }
-	Clipboard := saveClip
-}
-
-ClipPast(string){
-    global sleepTime
-    Clipboard := string
-    send,^v
-    sleep, % sleepTime ; sleepしないとうまく出力されない
-    Clipboard := saveClip
-}
-
-;ウィンドウ操作==================================================================================
+;ウィンドウ操作
 ~VK1D & 4::!F4
 
 ; ウィンドウ最小化
@@ -193,19 +99,10 @@ ClipPast(string){
 ~VK1D & ,::Send,{Blind}{End}
 
 ;マウス操作
-~VK1C & sc027::MouseCursorMove(-10,0) ;← ;キー
-~VK1C & sc028::MouseCursorMove(10,0) ;→ ]キー
-~VK1C & @::MouseCursorMove(0,-10) ;↑
-~VK1C & /::MouseCursorMove(0,10) ;↓
-
-MouseCursorMove(x,y){
-    If GetKeyState("ctrl"){
-        cursorSpeed := 10
-        x *= cursorSpeed
-        y *= cursorSpeed
-    }
-    MouseClick,Left,x,y,1,0,U,R
-}
+~VK1C & sc027::MouseCursorMove("left")
+~VK1C & sc028::MouseCursorMove("right")
+~VK1C & @::MouseCursorMove("up")
+~VK1C & /::MouseCursorMove("down")
 
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
@@ -236,18 +133,13 @@ MouseCursorMove(x,y){
 ~VK1D & q::Send,{End}{Home}{Home}+{Down}
 
 ;日付出力
-~VK1C & d::
-    currentClip := Clipboard
-    FormatTime,timeString,,% "ShortDate"
-    ClipPast(timeString)
-    Clipboard := currentClip
-    Return
+~VK1C & d::CurrentDate()
 
 #IFWinActive ahk_exe Explorer.EXE
     F1::send,!vsf
 #IFWinActive
 
-;VBE=============================================================================================
+;VBE
 #IfWinActive ahk_class wndclass_desked_gsk
     ; & _
     ~VK1D & 6::Send,{Space}{&}{Space}{_}
@@ -260,7 +152,7 @@ MouseCursorMove(x,y){
     ~VK1D & g::Send,^a{Del}{F7}
 #IfWinActive
 
-;CamtasiaStudio===================================================================================
+;CamtasiaStudio
 #IfWinActive ahk_exe CamtasiaStudio.exe
     ;ステッチ
     ~VK1D & s::Send,^!i

@@ -1,0 +1,88 @@
+﻿Return
+
+ViewSandMenu(){
+    Menu,sand,add,% """ """ . "`t &2",	    doubleQuotation
+    Menu,sand,add,% "# #`t &3",	            hash
+    Menu,sand,add,% "`% `%`t &5",           percent
+    Menu,sand,add,% "' '`t &7",	            singleQuotation
+    Menu,sand,add,% "( )`t &8",	            roundBrackets
+    Menu,sand,add,% "「 」`t &9",	         kagiKakko
+    Menu,sand,add,% "[ ]`t &[",	            squareBrackets
+    Menu,sand,add,% "{ }`t &}",	            curlyBrackets
+    Menu,sand,add,% "< >`t &a",	            arrow
+    Menu,sand,add,% "<kbd >`t &k",	        kbd
+    Menu,sand,add,% "【】`t &s",	         sumiKakko
+    Menu,sand,add,% "??`t &i",	            inp
+    Menu,sand,Show,% A_CaretX, % A_CaretY + 25
+}
+
+singleQuotation:
+    SymbolSandwich("'","'")
+Return
+
+doubleQuotation:
+    SymbolSandwich("""","""")
+Return
+
+roundBrackets:
+    SymbolSandwich("(",")")
+Return
+
+curlyBrackets:
+    SymbolSandwich("{{}","{}}")
+Return
+
+squareBrackets:
+    SymbolSandwich("[","]")
+Return
+
+hash:
+    SymbolSandwich("#","#")
+Return
+
+percent:
+    SymbolSandwich("%","%")
+Return
+
+kagiKakko:
+    SymbolSandwich("「","」")
+Return
+
+sumiKakko:
+    SymbolSandwich("【","】")
+Return
+
+arrow:
+    SymbolSandwich("<",">")
+Return
+
+kbd:
+    SymbolSandwich("<kbd>","</kbd>")
+Return
+
+inp:
+    InputBox,val,任意文字,`,で前後を区別,,150,120
+    If (ErrorLevel = 0) { ;OKが押された
+        StringSplit,ary,val,"`,",% A_Space
+        If (ary0 = 2) {
+            SymbolSandwich(ary1,ary2)
+        } Else {
+            SymbolSandwich(val,val)
+        }
+    }
+Return
+
+SymbolSandwich(p1,p2){
+	saveClip := Clipboard
+    selectionString := GetSelectionString()
+    isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
+    If isCrCf { ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
+        ClipPast(p1 p2)
+    } Else {
+        ClipPast(p1 selectionString p2)
+    }
+    if isCrCf {
+        Send,{Left}
+    }
+	Clipboard := saveClip
+}

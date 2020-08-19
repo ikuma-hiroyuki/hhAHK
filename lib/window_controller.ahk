@@ -1,5 +1,9 @@
+winDelayTime(){
+    return 10
+}
+
 winMoveCenter(){
-    SetWinDelay, 0
+    SetWinDelay, winDelayTime()
     WinGetPos,x,y,appWidth,appHeight,A
     appWidth /= 2
     appHeight /= 2
@@ -8,8 +12,8 @@ winMoveCenter(){
     WinMove,A,,x,y
 }
 
-WindowMove(moveX,moveY) {
-    SetWinDelay, 0
+WindowMove(moveX,moveY){
+    SetWinDelay, winDelayTime()
     WinGetPos,x,y,,,A
     if GetKeyState("ctrl"){
         moveX *= 5
@@ -20,8 +24,14 @@ WindowMove(moveX,moveY) {
     WinMove,A,,x,y
 }
 
+WinResize(width,height){
+    SetWinDelay, winDelayTime()
+    WinRestore,A
+    WinMove,A,,,,width,height
+}
+
 AutoWinReSize(){
-    SetWinDelay, 0
+    SetWinDelay, winDelayTime()
     WinGetTitle,winTitle,A
     IF (InStr(winTitle,"chrome") > 0) {
         Gosub,Large
@@ -60,38 +70,32 @@ ViewWinsizeMenu(){
     Menu,rSize,Show, % appWidth / 2 - 100 , % appHeight / 2 - 100
 }
 
-WinResize(width,height){
-    SetWinDelay, 0
-    WinRestore,A
-    WinMove,A,,,,width,height
-}
-
 return ; Auto-execute終了
 
 Mini:
     WinResize(765,650)
-Return
+    Return
 
 Small:
     WinResize(1000,850)
-Return
+    Return
 
 Tate:
     WinResize(1110,1200)
-Return
+    Return
 
 Yoko:
     WinResize(1300,1000)
-Return
+    Return
 
 Large:
     WinResize(1600,1250)
-Return
+    Return
 
 Fhd:
     WinResize(1920,1080)
-Return
+    Return
 
 YoutubeThumbnail:
     WinResize(1280,720)
-Return
+    Return
