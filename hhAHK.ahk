@@ -15,53 +15,36 @@ sc033 = ,
 #UseHook
 #NoEnv
 #SingleInstance,Force
+
 SendMode Input
 SetWorkingDir,%A_ScriptDir%
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
-googlSearch := "https://www.google.com/search?q="
-amazonSerch := "https://www.amazon.co.jp/s?k="
-deeplTrans := "https://www.deepl.com/translator#"
-googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
-everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
-waitTime := 0.2 ; second
 sleepTime := 100 ; millisecond
 
+#Include, %A_ScriptDir%\lib\window_controller.ahk
+#Include, %A_ScriptDir%\lib\searches.ahk
+#Include, %A_ScriptDir%\lib\components.ahk
 
-; 汎用関数=======================================================================================
-keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
-    keyWait,% key,T0.3
-    if (ErrorLevel = 1) {
-        proc.call()
+~VK1C & 0::AhkReload()
+~VK1C & 9::AhkExit()
+
+; everythingで検索
+#S::SelectStrEverythingSerth()
+; 選択した文字をgoogle検索する
+~VK1D & s::SelectStrGoogleSerch()
+; 選択した文字をAmazon検索する
+~VK1D & a::SelectStrAmazonSerch()
+; 選択した文字を翻訳する
+~VK1D & t::
+    if GetKeyState("ctrl"){
+        SelectStrGoogleTrans()
+    }Else{
+        SelectStrDeepLTrans()
     }
-}
+    Return
 
-keyRenda(proc) {
-    If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 180) {
-        proc.call()
-    }
-}
-
-;ユーティリティ==================================================================================
-
-~VK1C & 0::
-    ToolTip, % "Reload"
-    SetTimer, reloadLabel, 1000
-    return
-
-reloadLabel:
-    Reload
-    tooltip
-    return
-
-~VK1C & 9::
-    ToolTip, % "Exit"
-    SetTimer, exitLabel, 1000
-    return
-exitLabel:
-    ExitApp
-    return
 
 ;クリップボード履歴
 ~VK1D & V::Send,#v
@@ -69,7 +52,7 @@ exitLabel:
 ;コンテキストメニュー表示
 ~VK1D & r::Send,+{F10}
 
-;記号入力=======================================================================================
+;記号入力
 ~VK1D & 2 Up::Gosub,doubleQuotation ;""
 ~VK1D & 3 Up::Gosub,sharp ;##
 ~VK1D & 7 Up::Gosub,singleQuotation ;''
@@ -152,7 +135,6 @@ inp:
 Return
 
 SymbolSandwich(p1,p2){
-    global sleepTime
 	saveClip := Clipboard
     selectionString := GetSelectionString()
     isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
@@ -183,95 +165,15 @@ ClipPast(string){
 
 ;ウィンドウサイズ変更
 ~VK1D & w Up::
-    if GetKeyState("vk1c"){
-        viewWinsizeMenu()
+    if GetKeyState("VK1C"){
+        ViewWinsizeMenu()
     }Else{
-        autoWinReSize()
+        AutoWinReSize()
     }
     Return
 
-autoWinReSize(){
-    WinGetTitle,winTitle,A
-    IF (InStr(winTitle,"chrome") > 0) {
-        Gosub,Large
-    }Else If (InStr(winTitle,"Dynalist")>0) {
-        Gosub,Tate
-    }Else If WinActive("ahk_exe Code.exe") { ;vs code
-        Gosub,Large
-    }Else If WinActive("ahk_exe studio64.exe") { ;android studio
-        Gosub,Large
-    }Else If WinActive("ahk_class MozillaWindowClass") {
-        Gosub,Tate
-    }Else If WinActive("ahk_class XLMAIN") { ;excel
-        Gosub,Fhd
-    }Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
-        Gosub,Fhd
-    }Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
-        Gosub,Large
-    }Else If WinActive("ahk_exe Explorer.EXE") {
-        Gosub,Small
-    }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
-        ; なにもしない
-    }Else {
-        Gosub,Yoko
-    }
-}
-
-viewWinsizeMenu(){
-    WinGetPos, , , appWidth, appHeight, A
-    Menu,rSize,add,&Mini, Mini
-    Menu,rSize,add,&Small, Small
-    Menu,rSize,add,&Tate, Tate
-    Menu,rSize,add,&Yoko, Yoko
-    Menu,rSize,add,&Large, Large
-    Menu,rSize,add,F&HD, Fhd
-    Menu,rSize,add,Y&utube,YoutubeThumbnail
-    Menu,rSize,Show, % appWidth / 2 - 100 , % appHeight / 2 - 100
-}
-
-Mini:
-    WinResize(765,650)
-Return
-
-Small:
-    WinResize(1000,850)
-Return
-
-Tate:
-    WinResize(1110,1200)
-Return
-
-Yoko:
-    WinResize(1300,1000)
-Return
-
-Large:
-    WinResize(1600,1250)
-Return
-
-Fhd:
-    WinResize(1920,1080)
-Return
-
-YoutubeThumbnail:
-    WinResize(1280,720)
-Return
-
-WinResize(width,height){
-    WinRestore,A
-    WinMove,A,,,,width,height
-}
-
 ;ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
-winMoveCenter(){
-    WinGetPos,x,y,appWidth,appHeight,A
-    appWidth /= 2
-    appHeight /= 2
-    x := (A_ScreenWidth / 2) - appWidth
-    y := (A_ScreenHeight / 2) - appheight
-    WinMove,A,,x,y
-}
 
 ; window移動
 ~VK1D & Left::WindowMove(-25,0)
@@ -279,18 +181,8 @@ winMoveCenter(){
 ~VK1D & Up::WindowMove(0,-25)
 ~VK1D & Down::WindowMove(0,25)
 
-WindowMove(moveX,moveY) {
-    WinGetPos,x,y,,,A
-    if GetKeyState("ctrl"){
-        moveX *= 5
-        moveY *= 5
-    }
-    x += moveX
-    y += moveY
-    WinMove,A,,x,y
-}
 
-;カーソル移動====================================================================================
+;カーソル移動
 ~VK1D & sc027::Send,{Blind}{Left}	; ;
 ~VK1D & sc028::Send,{Blind}{Right}	; :
 ~VK1D & @::Send,{Blind}{Up}
@@ -300,7 +192,7 @@ WindowMove(moveX,moveY) {
 ~VK1D & k::Send,{Blind}{Home}
 ~VK1D & ,::Send,{Blind}{End}
 
-;マウス操作======================================================================================
+;マウス操作
 ~VK1C & sc027::MouseCursorMove(-10,0) ;← ;キー
 ~VK1C & sc028::MouseCursorMove(10,0) ;→ ]キー
 ~VK1C & @::MouseCursorMove(0,-10) ;↑
@@ -318,10 +210,10 @@ MouseCursorMove(x,y){
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
 ~VK1C & k::Click,WheelUp
-~VK1C & j::Click,WheelDown,,,wheelSpeed
+~VK1C & j::Click,WheelDown
 
 
-;文字列操作======================================================================================
+;文字列操作
 
 ;キー連打でエンターキー
 ; ~LShift Up::keyRenda(Func("sendEnterkey"))
@@ -341,59 +233,15 @@ MouseCursorMove(x,y){
 ~VK1D & c::Send,{Backspace}
 
 ;1行選択
-~VK1D & Q::Send,{End}{Home}{Home}+{Down}
-
-;エンターキー
-~VK1D & f::send,{Enter}
+~VK1D & q::Send,{End}{Home}{Home}+{Down}
 
 ;日付出力
-~vk1c & d::
+~VK1C & d::
     currentClip := Clipboard
     FormatTime,timeString,,% "ShortDate"
     ClipPast(timeString)
     Clipboard := currentClip
     Return
-
-;ブラウザで検索する==============================================================================
-
-; 選択した文字をgoogle検索する
-~vk1d & s::run,% googlSearch GetSelectionString(true)
-; 選択した文字をAmazon検索する
-~vk1d & a::run,% amazonSerch GetSelectionString(true)
-; 選択した文字を翻訳する
-~VK1D & t::
-    if GetKeyState("ctrl"){
-        run,% googleTrans TransParameter("ja&text=","en&text=")
-    }Else{
-        run,% deeplTrans TransParameter("en/ja/","ja/en/")
-    }
-    Return
-
-GetSelectionString(replace := false) {
-    global waitTime
-    Clipboard := ""
-    Send,^c
-    ClipWait, % waitTime
-    query := Clipboard
-    if replace {
-        query := StrReplace(query, A_Space , "`%20")
-        query := StrReplace(query, "`r`n" , "%0A")
-    }
-    Return query
-}
-
-TransParameter(waei,eiwa){
-    clip := GetSelectionString(true)
-    matchCount := RegExMatch(StrReplace(clip,"`%0A"), "[a-zA-Z]")
-    If (matchCount > 0) {
-        Return waei clip
-    }Else{
-        Return eiwa clip
-    }
-}
-
-; everythingで検索
-#S::run,% everythingCommand GetSelectionString()
 
 #IFWinActive ahk_exe Explorer.EXE
     F1::send,!vsf
