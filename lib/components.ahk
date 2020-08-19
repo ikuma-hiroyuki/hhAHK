@@ -1,11 +1,11 @@
 return
 
-GetSelectionString(replace := false){
+GetSelectionString(urlEncode := false){
     Clipboard := ""
     Send,^c
     ClipWait, 0.2
     query := Clipboard
-    if replace {
+    if urlEncode {
         query := StrReplace(query, A_Space, "`%20")
         query := StrReplace(query, "`r`n", "%0A")
     }

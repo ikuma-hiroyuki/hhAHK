@@ -12,7 +12,7 @@ ViewSandMenu(){
     Menu,sand,add,% "< >`t &a",	            arrow
     Menu,sand,add,% "<kbd >`t &k",	        kbd
     Menu,sand,add,% "【】`t &s",	         sumiKakko
-    Menu,sand,add,% "??`t &i",	            inp
+    Menu,sand,add,% "??`t &i",	            anyChar
     Menu,sand,Show,% A_CaretX, % A_CaretY + 25
 }
 
@@ -60,7 +60,7 @@ kbd:
     SymbolSandwich("<kbd>","</kbd>")
 Return
 
-inp:
+anyChar:
     InputBox,val,任意文字,`,で前後を区別,,150,120
     If (ErrorLevel = 0) { ;OKが押された
         StringSplit,ary,val,"`,",% A_Space
@@ -75,13 +75,14 @@ Return
 SymbolSandwich(p1,p2){
 	saveClip := Clipboard
     selectionString := GetSelectionString()
-    isCRCF := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
-    If isCrCf { ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
+    isClipbordNothing := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
+    If isClipbordNothing {
+        ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
         ClipPast(p1 p2)
     } Else {
         ClipPast(p1 selectionString p2)
     }
-    if isCrCf {
+    if isClipbordNothing {
         Send,{Left}
     }
 	Clipboard := saveClip

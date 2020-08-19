@@ -16,7 +16,7 @@ sc033 = ,
 #InstallKeybdHook
 #SingleInstance,Force
 
-SendMode Input
+SendMode input
 SetTitleMatchMode,2
 CoordMode,caret,Screen
 
@@ -56,10 +56,10 @@ CoordMode,caret,Screen
 ~VK1D & 7 Up::Gosub,singleQuotation
 ~VK1D & 8 Up::Gosub,roundBrackets
 ~VK1D & 5 Up::Gosub,percent
-~VK1D & 9 Up::Gosub,kagikakko ;カギ括弧
-~VK1D & [ Up::Gosub,squareBrackets ;角括弧
-~VK1D & ] Up::Gosub,curlyBrackets ;波括弧
-~VK1D & i Up::Gosub,inp ; 任意の文字
+~VK1D & 9 Up::Gosub,kagikakko
+~VK1D & [ Up::Gosub,squareBrackets
+~VK1D & ] Up::Gosub,curlyBrackets
+~VK1D & i Up::Gosub,anyChar
 ~VK1D & M Up::ViewSandMenu()
 
 
