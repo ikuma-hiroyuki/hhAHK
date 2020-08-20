@@ -1,9 +1,25 @@
-winDelayTime(){
-    return 10
+WinOnTop(){
+    static toggle := true
+    if (toggle = false){ ; ontopを全て解除
+        WinGet, id, list, , , Program Manager
+        Loop, % id {
+            StringTrimRight, this_id, id%A_Index%, 0
+            ; WinGetClass, this_class, ahk_id %this_id%
+            ; WinGetTitle, this_title, ahk_id %this_id%
+            WinSet, AlwaysOnTop, 0, ahk_id %this_id%
+        }
+    } Else {
+        WinSet, AlwaysOnTop, % 1, A
+    }
+    toggle ^= 1
 }
 
+onTopLabel:
+    Reload
+    tooltip
+    return
+
 winMoveCenter(){
-    SetWinDelay, winDelayTime()
     WinGetPos,x,y,appWidth,appHeight,A
     appWidth /= 2
     appHeight /= 2
@@ -12,10 +28,25 @@ winMoveCenter(){
     WinMove,A,,x,y
 }
 
-WindowMove(moveX,moveY){
-    SetWinDelay, winDelayTime()
+WindowMove(direction){
+    winMoveSpeed := 25
+    Switch  direction
+    {
+        case "left":
+            moveX:=-winMoveSpeed
+            moveY:=0
+        case "right":
+            moveX:=winMoveSpeed
+            moveY:=0
+        case "up":
+            moveX:=0
+            moveY:=-winMoveSpeed
+        case "down":
+            moveX:=0
+            moveY:=winMoveSpeed
+    }
     WinGetPos,x,y,,,A
-    if GetKeyState("ctrl"){
+    if GetKeyState("shift"){
         moveX *= 5
         moveY *= 5
     }
@@ -25,13 +56,11 @@ WindowMove(moveX,moveY){
 }
 
 WinResize(width,height){
-    SetWinDelay, winDelayTime()
     WinRestore,A
     WinMove,A,,,,width,height
 }
 
 AutoWinReSize(){
-    SetWinDelay, winDelayTime()
     WinGetTitle,winTitle,A
     IF (InStr(winTitle,"chrome") > 0) {
         Gosub,Large

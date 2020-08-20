@@ -29,7 +29,7 @@ roundBrackets:
 Return
 
 curlyBrackets:
-    SymbolSandwich("{{}","{}}")
+    SymbolSandwich("{","}")
 Return
 
 squareBrackets:

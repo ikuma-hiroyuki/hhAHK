@@ -1,21 +1,17 @@
 
-SelectStrGoogleSerch(){
-    SetWinDelay, 10
+googleSearchInSelectingString(){
     run,% "https://www.google.com/search?q=" GetSelectionString(true)
 }
 
-SelectStrAmazonSerch(){
-    SetWinDelay, 10
+amazonSearchInSelectingString(){
     run,% "https://www.amazon.co.jp/s?k=" GetSelectionString(true)
 }
 
-SelectStrDeepLTrans(){
-    SetWinDelay, 10
-    run,% "https://www.deepl.com/translator#"s TransParameter("en/ja/","ja/en/")
+deepLTranslationInSelectingString(){
+    run,% "https://www.deepl.com/translator#" TransParameter("en/ja/","ja/en/")
 }
 
-SelectStrGoogleTrans(){
-    SetWinDelay, 10
+googleTranslationInSelectingString(){
     run,% "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
           . TransParameter("ja&text=","en&text=")
 }
@@ -30,6 +26,6 @@ TransParameter(waei,eiwa){
     }
 }
 
-SelectStrEverythingSerth(){
+everythingSearchInSelectingString(){
     run,% "C:\Program Files\Everything\Everything.exe -s " GetSelectionString()
 }

@@ -14,8 +14,7 @@ GetSelectionString(urlEncode := false){
 
 ClipPast(string){
     Clipboard := string
-    send,^v
-    sleep, % 100 ; sleepしないとうまく出力されない
+    SendEvent, ^v
     Clipboard := saveClip
 }
 
@@ -31,6 +30,12 @@ keyRenda(proc){
         proc.call()
     }
 }
+;キー連打でエンターキー
+; ~LShift Up::keyRenda(Func("sendEnterkey"))
+; sendEnterkey(){
+;     Send,{Enter}
+; }
+
 
 AhkReload(){
     ToolTip, % "Reload"
