@@ -1,3 +1,10 @@
+WindowClose(){
+    ; WinCloseだと意図しないものまで閉じてしまうので自作
+    SetKeyDelay, 100
+    SendEvent, !{F4}
+    Return
+}
+
 WinOnTop(){
     static toggle := true
     if (toggle = false){ ; ontopを全て解除

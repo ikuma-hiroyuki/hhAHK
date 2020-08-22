@@ -1,19 +1,19 @@
 ﻿Return
 
 ViewSandMenu(){
-    Menu,sand,add,% """ """ . "`t &2",	    doubleQuotation
-    Menu,sand,add,% "# #`t &3",	            hash
-    Menu,sand,add,% "`% `%`t &5",           percent
-    Menu,sand,add,% "' '`t &7",	            singleQuotation
-    Menu,sand,add,% "( )`t &8",	            roundBrackets
-    Menu,sand,add,% "「 」`t &9",	         kagiKakko
-    Menu,sand,add,% "[ ]`t &[",	            squareBrackets
-    Menu,sand,add,% "{ }`t &}",	            curlyBrackets
-    Menu,sand,add,% "< >`t &a",	            arrow
-    Menu,sand,add,% "<kbd >`t &k",	        kbd
-    Menu,sand,add,% "【】`t &s",	         sumiKakko
-    Menu,sand,add,% "??`t &i",	            anyChar
-    Menu,sand,Show,% A_CaretX, % A_CaretY + 25
+    Menu,sand,add,% """ """ . "`t &2",	 doubleQuotation
+    Menu,sand,add,% "# #`t &3",	 hash
+    Menu,sand,add,% "`% `%`t &5", percent
+    Menu,sand,add,% "' '`t &7",	 singleQuotation
+    Menu,sand,add,% "( )`t &8",	 roundBrackets
+    Menu,sand,add,% "「 」`t &9",	 kagiKakko
+    Menu,sand,add,% "[ ]`t &[",	 squareBrackets
+    Menu,sand,add,% "{ }`t &}",	 curlyBrackets
+    Menu,sand,add,% "< >`t &a",	 arrow
+    Menu,sand,add,% "<kbd >`t &k",	 kbd
+    Menu,sand,add,% "【】`t &s",	 sumiKakko
+    Menu,sand,add,% "??`t &i",	 anyChar
+    Menu,sand,Show,% A_CaretX, % A_CaretY + 25 ; TODO メニュー位置をキャレットにする
 }
 
 singleQuotation:
@@ -29,7 +29,7 @@ roundBrackets:
 Return
 
 curlyBrackets:
-    SymbolSandwich("{","}")
+SymbolSandwich("{","}")
 Return
 
 squareBrackets:
@@ -61,11 +61,11 @@ kbd:
 Return
 
 anyChar:
-    InputBox,val,任意文字,`,で前後を区別,,150,120
+    InputBox,val,% "任意文字",% ",で前後を区別",,150,120
     If (ErrorLevel = 0) { ;OKが押された
-        StringSplit,ary,val,"`,",% A_Space
-        If (ary0 = 2) {
-            SymbolSandwich(ary1,ary2)
+        ary := StrSplit(val, ",")
+        If (ary.Length() = 2) {
+            SymbolSandwich(ary[1],ary[2])
         } Else {
             SymbolSandwich(val,val)
         }
@@ -73,17 +73,17 @@ anyChar:
 Return
 
 SymbolSandwich(p1,p2){
-	saveClip := Clipboard
+    saveClip := Clipboard
     selectionString := GetSelectionString()
     isClipbordNothing := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
     If isClipbordNothing {
         ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        ClipPast(p1 p2)
+        StringPast(p1 p2)
     } Else {
-        ClipPast(p1 selectionString p2)
+        StringPast(p1 selectionString p2)
     }
     if isClipbordNothing {
         Send,{Left}
     }
-	Clipboard := saveClip
+    Clipboard := saveClip
 }

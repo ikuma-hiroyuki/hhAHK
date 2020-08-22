@@ -47,11 +47,11 @@ CoordMode,caret,Screen
     }Else{
         deepLTranslationInSelectingString()
     }
-    Return
+Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 ~VK1D & 1::WinMinimize,A
-~VK1D & 4::!F4
+~VK1D & 4::WindowClose()
 
 ; アクティブウィンドウを常に全面にする。shiftで全解除。
 ~vk1d & g::WinOnTop()
@@ -63,7 +63,7 @@ CoordMode,caret,Screen
     }Else{
         AutoWinReSize()
     }
-    Return
+Return
 
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
@@ -85,8 +85,8 @@ CoordMode,caret,Screen
 ~VK1D & ,::Send,{Blind}{End}
 
 ; マウス操作--------------------------------------------------------------------------------
-~VK1C & sc027::MouseCursorMove("left")
-~VK1C & sc028::MouseCursorMove("right")
+~VK1C & sc027::MouseCursorMove("left") ; ;
+~VK1C & sc028::MouseCursorMove("right") ; :
 ~VK1C & @::MouseCursorMove("up")
 ~VK1C & /::MouseCursorMove("down")
 
@@ -103,28 +103,28 @@ CoordMode,caret,Screen
 ; delete
 ~VK1D & d::Send,{delete}
 ; Backspace
-~VK1D & f::Send,{Backspace}
+~VK1D & c::Send,{Backspace}
 ; 1行選択
 ~VK1D & q::Send,{End}{Home}{Home}+{Down}
 ; 日付出力
 ~VK1C & d::CurrentDate()
 
 ; 記号ペア出力
-~VK1D & 2 Up::Gosub,doubleQuotation
-~VK1D & 3 Up::Gosub,hash
-~VK1D & 7 Up::Gosub,singleQuotation
-~VK1D & 8 Up::Gosub,roundBrackets
-~VK1D & 5 Up::Gosub,percent
-~VK1D & 9 Up::Gosub,kagikakko
-~VK1D & i Up::Gosub,anyChar
-~VK1D & M Up::ViewSandMenu()
+~VK1D & 2 Up::Gosub, doubleQuotation
+~VK1D & 3 Up::Gosub, hash
+~VK1D & 7 Up::Gosub, singleQuotation
+~VK1D & 8 Up::Gosub, roundBrackets
+~VK1D & 5 Up::Gosub, percent
+~VK1D & 9 Up::Gosub, kagikakko
+~VK1D & i Up::Gosub, anyChar
 ~VK1D & [ Up::
     if GetKeyState("Shift"){
         Gosub,curlyBrackets
     }else{
-    Gosub,squareBrackets
+        Gosub,squareBrackets
     }
-    Return
+Return
+~VK1D & M Up::ViewSandMenu()
 
 #IFWinActive ahk_exe Explorer.EXE
     F1::send,!vsf

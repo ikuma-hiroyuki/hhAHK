@@ -4,18 +4,18 @@ GetSelectionString(urlEncode := false){
     Clipboard := ""
     Send,^c
     ClipWait, 0.2
-    query := Clipboard
+    selectionStr := Clipboard
     if urlEncode {
-        query := StrReplace(query, A_Space, "`%20")
-        query := StrReplace(query, "`r`n", "%0A")
+        selectionStr := StrReplace(selectionStr, A_Space, "`%20")
+        selectionStr := StrReplace(selectionStr, "`r`n", "%0A")
     }
-    Return query
+    Return selectionStr
 }
 
-ClipPast(string){
+StringPast(string){
     Clipboard := string
+    SetKeyDelay, 100
     SendEvent, ^v
-    Clipboard := saveClip
 }
 
 keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
@@ -83,6 +83,6 @@ MouseCursorMove(direction){
 CurrentDate(){
     currentClip := Clipboard
     FormatTime,timeString,,% "ShortDate"
-    ClipPast(timeString)
+    StringPast(timeString)
     Clipboard := currentClip
 }
