@@ -13,7 +13,7 @@ ViewSandMenu(){
     Menu,sand,add,% "<kbd >`t &k",	 kbd
     Menu,sand,add,% "【】`t &s",	 sumiKakko
     Menu,sand,add,% "??`t &i",	 anyChar
-    Menu,sand,Show,% A_CaretX, % A_CaretY + 25 ; TODO メニュー位置をキャレットにする
+    Menu,sand,Show,% A_CaretX, % A_CaretY + 50
 }
 
 singleQuotation:
@@ -61,14 +61,10 @@ kbd:
 Return
 
 anyChar:
-    InputBox,val,% "任意文字",% ",で前後を区別",,150,120
+    InputBox,val,% "任意文字",% ",で前後を区別",,150,120,% A_CaretX, % A_CaretY + 50
     If (ErrorLevel = 0) { ;OKが押された
         ary := StrSplit(val, ",")
-        If (ary.Length() = 2) {
-            SymbolSandwich(ary[1],ary[2])
-        } Else {
-            SymbolSandwich(val,val)
-        }
+        ary.Length() = 2 ? SymbolSandwich(ary[1],ary[2]) : SymbolSandwich(val,val)
     }
 Return
 
@@ -76,12 +72,8 @@ SymbolSandwich(p1,p2){
     saveClip := Clipboard
     selectionString := GetSelectionString()
     isClipbordNothing := InStr(selectionString,"`r`n") > 0 or (selectionString = "")
-    If isClipbordNothing {
-        ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
-        StringPast(p1 p2)
-    } Else {
-        StringPast(p1 selectionString p2)
-    }
+    ; vs code等のIDEは文字列を選択しないでCtrl+Cを押すと行全体をコピーするので回避
+    isClipbordNothing ? StringPast(p1 p2) : StringPast(p1 selectionString p2)
     if isClipbordNothing {
         Send,{Left}
     }

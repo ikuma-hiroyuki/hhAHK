@@ -21,7 +21,8 @@ ListLines, Off
 SetWinDelay, 150
 SendMode input
 SetTitleMatchMode,2
-CoordMode,caret,Screen
+CoordMode,Menu,Screen
+CoordMode,Caret,Screen
 
 #Include, %A_ScriptDir%\lib\searches.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
