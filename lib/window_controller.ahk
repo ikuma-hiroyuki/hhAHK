@@ -95,7 +95,6 @@ AutoWinReSize(){
 }
 
 ViewWinsizeMenu(){
-    CoordMode,Menu,Window
     WinGetPos, , , appWidth, appHeight, A
     Menu,rSize,add,&Mini, Mini
     Menu,rSize,add,&Small, Small

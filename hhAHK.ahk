@@ -21,8 +21,6 @@ ListLines, Off
 SetWinDelay, 150
 SendMode input
 SetTitleMatchMode,2
-CoordMode,Menu,Screen
-CoordMode,Caret,Screen
 
 #Include, %A_ScriptDir%\lib\searches.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
@@ -64,7 +62,7 @@ Return
     }Else{
         AutoWinReSize()
     }
-Return
+    Return
 
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
@@ -111,6 +109,7 @@ Return
 ~VK1C & d::CurrentDate()
 
 ; 記号ペア出力
+~VK1D & M Up::ViewSandMenu()
 ~VK1D & 2 Up::Gosub, doubleQuotation
 ~VK1D & 3 Up::Gosub, hash
 ~VK1D & 7 Up::Gosub, singleQuotation
@@ -124,8 +123,7 @@ Return
     }else{
         Gosub,squareBrackets
     }
-Return
-~VK1D & M Up::ViewSandMenu()
+    Return
 
 #IFWinActive ahk_exe Explorer.EXE
     F1::send,!vsf
