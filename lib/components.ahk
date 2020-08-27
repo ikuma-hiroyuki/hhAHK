@@ -1,23 +1,3 @@
-return
-
-GetSelectionString(urlEncode := false){
-    Clipboard := ""
-    Send,^c
-    ClipWait, 0.2
-    selectionStr := Clipboard
-    if urlEncode {
-        selectionStr := StrReplace(selectionStr, A_Space, "`%20")
-        selectionStr := StrReplace(selectionStr, "`r`n", "%0A")
-    }
-    Return selectionStr
-}
-
-StringPast(string){
-    Clipboard := string
-    SetKeyDelay, 100
-    SendEvent, ^v
-}
-
 keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
     keyWait,% key,T0.3
     if (ErrorLevel = 1) {
@@ -36,6 +16,7 @@ keyRenda(proc){
 ;     Send,{Enter}
 ; }
 
+return
 
 AhkReload(){
     ToolTip, % "Reload"

@@ -15,16 +15,23 @@ sc033 = ,
 #UseHook
 #InstallKeybdHook
 #SingleInstance,Force
-
-SetBatchLines, -1
 ListLines, Off
-SetWinDelay, 150
 SendMode input
-SetTitleMatchMode,2
+SetWinDelay, 150
+SetBatchLines, -1
+SetTitleMatchMode, 2
+SysGet, MonitorPrimary, MonitorPrimary
+SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
 
-#Include, %A_ScriptDir%\lib\searches.ahk
+googlSearch := "https://www.google.com/search?q="
+amazonSerch := "https://www.amazon.co.jp/s?k="
+deeplTrans := "https://www.deepl.com/translator#"
+googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
+everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
+
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
+#Include, %A_ScriptDir%\lib\string_controller.ahk
 #Include, %A_ScriptDir%\lib\window_controller.ahk
 
 ~VK1C & 0::AhkReload()
@@ -37,14 +44,17 @@ SetTitleMatchMode,2
 ~VK1D & r::Send,+{F10}
 
 ; 検索--------------------------------------------------------------------------------
-#S::everythingSearchInSelectingString()
-~VK1D & s::googleSearchInSelectingString()
-~VK1D & a::amazonSearchInSelectingString()
+searchExecution(url){
+    run,% url
+}
+#S::searchExecution(everythingCommand GetSelectionString())
+~VK1D & s::searchExecution(googlSearch GetSelectionString())
+~VK1D & a::searchExecution(amazonSerch GetSelectionString())
 ~VK1D & t::
     if GetKeyState("ctrl"){
-        googleTranslationInSelectingString()
+        searchExecution(googleTrans TransParameter("ja&text=","en&text="))
     }Else{
-        deepLTranslationInSelectingString()
+        searchExecution(deeplTrans TransParameter("en/ja/","ja/en/"))
     }
 Return
 
@@ -72,6 +82,8 @@ Return
 ~VK1D & Right::WindowMove("right")
 ~VK1D & Up::WindowMove("up")
 ~VK1D & Down::WindowMove("down")
+
+~VK1C & d::WinActivate, % "Dynalist"
 
 ; カーソル移動--------------------------------------------------------------------------------
 ~VK1D & sc027::Send,{Blind}{Left}	; ;
@@ -106,7 +118,7 @@ Return
 ; 1行選択
 ~VK1D & q::Send,{End}{Home}{Home}+{Down}
 ; 日付出力
-~VK1C & d::CurrentDate()
+~VK1C & c::CurrentDate()
 
 ; 記号ペア出力
 ~VK1D & M Up::ViewSandMenu()

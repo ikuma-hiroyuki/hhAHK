@@ -90,20 +90,20 @@ AutoWinReSize(){
     }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
     }Else {
-        Gosub,Yoko
+        Gosub,Small
     }
 }
 
 ViewWinsizeMenu(){
-    WinGetPos, , , appWidth, appHeight, A
-    Menu,rSize,add,&Mini, Mini
-    Menu,rSize,add,&Small, Small
-    Menu,rSize,add,&Tate, Tate
-    Menu,rSize,add,&Yoko, Yoko
-    Menu,rSize,add,&Large, Large
-    Menu,rSize,add,F&HD, Fhd
-    Menu,rSize,add,Y&utube,YoutubeThumbnail
-    Menu,rSize,Show, % appWidth / 2 - 100 , % appHeight / 2 - 100
+    WinGetPos,,,appWidth, appHeight, A
+    Menu,rSize,add,% "&Mini", Mini
+    Menu,rSize,add,% "&Small", Small
+    Menu,rSize,add,% "&Tate", Tate
+    Menu,rSize,add,% "&Yoko", Yoko
+    Menu,rSize,add,% "&Large", Large
+    Menu,rSize,add,% "F&HD", Fhd
+    Menu,rSize,add,% "Y&utube",YoutubeThumbnail
+    Menu,rSize,Show, % appWidth / 2 - 100, % appHeight / 2 - 100
 }
 
 return ; Auto-execute終了
@@ -117,11 +117,12 @@ Small:
     Return
 
 Tate:
-    WinResize(1110,1200)
+    WinMove,A,,MonitorWorkAreaRight / 4, 0
+    WinResize(MonitorWorkAreaRight / 2, MonitorWorkAreaBottom)
     Return
 
 Yoko:
-    WinResize(1300,1000)
+    WinResize(MonitorWorkAreaRight / 2, 1000)
     Return
 
 Large:
