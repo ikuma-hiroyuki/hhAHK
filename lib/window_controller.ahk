@@ -4,7 +4,7 @@ WindowClose(){
     SendEvent, !{F4}
     Return
 }
-
+ 
 WinOnTop(){
     static toggle := true
     if (toggle = false){ ; ontopを全て解除
@@ -72,13 +72,13 @@ AutoWinReSize(){
     IF (InStr(winTitle,"chrome") > 0) {
         Gosub,Large
     }Else If (InStr(winTitle,"Dynalist")>0) {
-        Gosub,Tate
+        Gosub,Medium
     }Else If WinActive("ahk_exe Code.exe") { ;vs code
         Gosub,Large
     }Else If WinActive("ahk_exe studio64.exe") { ;android studio
         Gosub,Large
     }Else If WinActive("ahk_class MozillaWindowClass") {
-        Gosub,Tate
+        Gosub,Medium
     }Else If WinActive("ahk_class XLMAIN") { ;excel
         Gosub,Fhd
     }Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
@@ -90,14 +90,14 @@ AutoWinReSize(){
     }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
     }Else {
-        Gosub,Small
+        Gosub,Medium
     }
 }
 
 ViewWinsizeMenu(){
     WinGetPos,,,appWidth, appHeight, A
-    Menu,rSize,add,% "&Mini", Mini
     Menu,rSize,add,% "&Small", Small
+    Menu,rSize,add,% "&Medium", Medium
     Menu,rSize,add,% "&Tate", Tate
     Menu,rSize,add,% "&Yoko", Yoko
     Menu,rSize,add,% "&Large", Large
@@ -108,12 +108,12 @@ ViewWinsizeMenu(){
 
 return ; Auto-execute終了
 
-Mini:
-    WinResize(765,650)
+Small:
+    WinResize(900,800)
     Return
 
-Small:
-    WinResize(1000,850)
+Medium:
+    WinResize(1100,1200)
     Return
 
 Tate:

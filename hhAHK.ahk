@@ -106,6 +106,11 @@ Return
 ~VK1C & k::Click,WheelUp
 ~VK1C & j::Click,WheelDown
 
+~VK1D & RButton::send,{F2}
+~VK1D & LButton::send,{Enter}
+~VK1D & WheelUp::send,{up}
+~VK1D & WheelDown::send,{down}
+
 ; 文字列操作--------------------------------------------------------------------------------
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
