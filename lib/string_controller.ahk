@@ -10,13 +10,21 @@ GetSelectionString(urlEncode := false){
     Return selectionStr
 }
 
-TransParameter(waei,eiwa){
+RunTrans(baseUrl){
+    if instr(baseUrl, "translate.google.com") > 0 {
+        waei := "ja&text="
+        eiwa := "en&text="
+    } else if instr(baseUrl, "deepl.com") > 0 {
+        waei := "en/ja/"
+        eiwa := "ja/en/"
+    }
+
     clip := GetSelectionString(true)
     matchCount := RegExMatch(StrReplace(clip,"`%0A"), "[a-zA-Z]")
     If (matchCount > 0) {
-        Return waei clip
+        run,% baseUrl waei clip
     }Else{
-        Return eiwa clip
+        run,% baseUrl eiwa clip
     }
 }
 

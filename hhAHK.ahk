@@ -33,6 +33,8 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
 #Include, %A_ScriptDir%\lib\string_controller.ahk
 #Include, %A_ScriptDir%\lib\window_controller.ahk
+#Include, %A_ScriptDir%\lib\mouse_controller.ahk
+
 
 ~VK1C & 0::AhkReload()
 ~VK1C & 9::AhkExit()
@@ -44,19 +46,16 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1D & r::Send,+{F10}
 
 ; 検索--------------------------------------------------------------------------------
-searchExecution(url){
-    run,% url
-}
-#S::searchExecution(everythingCommand GetSelectionString())
-~VK1D & s::searchExecution(googlSearch GetSelectionString())
-~VK1D & a::searchExecution(amazonSerch GetSelectionString())
+#S::run,% everythingCommand GetSelectionString()
+~VK1D & s::run,% googlSearch GetSelectionString()
+~VK1D & a::run,% amazonSerch GetSelectionString()
 ~VK1D & t::
     if GetKeyState("ctrl"){
-        searchExecution(googleTrans TransParameter("ja&text=","en&text="))
+        RunTrans(googleTrans)
     }Else{
-        searchExecution(deeplTrans TransParameter("en/ja/","ja/en/"))
+        RunTrans(deeplTrans)
     }
-Return
+    Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 ~VK1D & 1::WinMinimize,A
@@ -111,6 +110,10 @@ Return
 ~VK1D & WheelUp::send,{up}
 ~VK1D & WheelDown::send,{down}
 
++WheelUp::send,^{PgUp}
++WheelDown::send,^{PgDn}
+
+~VK1D & f::MouseCursorMoveAppCenter()
 ; 文字列操作--------------------------------------------------------------------------------
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
