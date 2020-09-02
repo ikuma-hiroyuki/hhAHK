@@ -1,7 +1,7 @@
 GetSelectionString(urlEncode := false){
     Clipboard := ""
     Send,^c
-    ClipWait, 0.2
+    ClipWait,0.2
     selectionStr := Clipboard
     if urlEncode {
         selectionStr := StrReplace(selectionStr, A_Space, "`%20")

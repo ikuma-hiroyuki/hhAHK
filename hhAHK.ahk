@@ -31,9 +31,9 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
+#Include, %A_ScriptDir%\lib\mouse_controller.ahk
 #Include, %A_ScriptDir%\lib\string_controller.ahk
 #Include, %A_ScriptDir%\lib\window_controller.ahk
-#Include, %A_ScriptDir%\lib\mouse_controller.ahk
 
 
 ~VK1C & 0::AhkReload()
@@ -46,7 +46,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1D & r::Send,+{F10}
 
 ; 検索--------------------------------------------------------------------------------
-#S::run,% everythingCommand GetSelectionString()
+#s up::run,% everythingCommand """" GetSelectionString() """"
 ~VK1D & s::run,% googlSearch GetSelectionString()
 ~VK1D & a::run,% amazonSerch GetSelectionString()
 ~VK1D & t::
@@ -95,16 +95,19 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1D & ,::Send,{Blind}{End}
 
 ; マウス操作--------------------------------------------------------------------------------
+; カーソル移動
 ~VK1C & sc027::MouseCursorMove("left") ; ;
 ~VK1C & sc028::MouseCursorMove("right") ; :
 ~VK1C & @::MouseCursorMove("up")
 ~VK1C & /::MouseCursorMove("down")
+~VK1D & f::MouseCursorMoveAppCenter()
 
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
 ~VK1C & k::Click,WheelUp
 ~VK1C & j::Click,WheelDown
 
+; キーを送る
 ~VK1D & RButton::send,{F2}
 ~VK1D & LButton::send,{Enter}
 ~VK1D & WheelUp::send,{up}
@@ -112,8 +115,9 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 
 +WheelUp::send,^{PgUp}
 +WheelDown::send,^{PgDn}
+!WheelUp::send,{Backspace}
+!WheelDown::send,{delete}
 
-~VK1D & f::MouseCursorMoveAppCenter()
 ; 文字列操作--------------------------------------------------------------------------------
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
