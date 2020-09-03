@@ -5,6 +5,8 @@ GetSelectionString(urlEncode := false){
     selectionStr := Clipboard
     if urlEncode {
         selectionStr := StrReplace(selectionStr, A_Space, "`%20")
+        selectionStr := StrReplace(selectionStr, "#", "`%23")
+        selectionStr := StrReplace(selectionStr, "&", "`%26")
         selectionStr := StrReplace(selectionStr, "`r`n", "%0A")
     }
     Return selectionStr

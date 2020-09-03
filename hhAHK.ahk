@@ -29,6 +29,7 @@ deeplTrans := "https://www.deepl.com/translator#"
 googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 
+#Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
 #Include, %A_ScriptDir%\lib\mouse_controller.ahk
@@ -44,6 +45,9 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 
 ; コンテキストメニュー表示
 ~VK1D & r::Send,+{F10}
+
+~VK1C up::keyRenda(Func("IME_SET"), 1)
+~VK1D up::keyRenda(Func("IME_SET"), 0)
 
 ; 検索--------------------------------------------------------------------------------
 #s up::run,% everythingCommand """" GetSelectionString() """"
@@ -108,15 +112,15 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1C & j::Click,WheelDown
 
 ; キーを送る
-~VK1D & RButton::send,{F2}
-~VK1D & LButton::send,{Enter}
-~VK1D & WheelUp::send,{up}
-~VK1D & WheelDown::send,{down}
+~VK1D & RButton::Sendevent,{F2}
+~VK1D & LButton::Sendevent,{Enter}
+~VK1D & WheelUp::Sendevent,{up}
+~VK1D & WheelDown::Sendevent,{down}
 
-+WheelUp::send,^{PgUp}
-+WheelDown::send,^{PgDn}
-!WheelUp::send,{Backspace}
-!WheelDown::send,{delete}
++WheelUp::Sendevent,^{PgUp}
++WheelDown::Sendevent,^{PgDn}
+!WheelUp::Sendevent,{Backspace}
+!WheelDown::Sendevent,{delete}
 
 ; 文字列操作--------------------------------------------------------------------------------
 ; カーソルが途中でも下に一行挿入
