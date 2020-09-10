@@ -4,7 +4,7 @@ WindowClose(){
     SendEvent, !{F4}
     Return
 }
- 
+
 WinOnTop(){
     static toggle := true
     if (toggle = false){ ; ontopを全て解除
@@ -71,25 +71,27 @@ AutoWinReSize(){
     WinGetTitle,winTitle,A
     IF (InStr(winTitle,"chrome") > 0) {
         Gosub,Large
-    }Else If (InStr(winTitle,"Dynalist")>0) {
+    } Else If (InStr(winTitle,"Dynalist")>0) {
         Gosub,Medium
-    }Else If WinActive("ahk_exe Code.exe") { ;vs code
+    } Else if (WinActive("ahk_exe dbeaver.exe")) {
         Gosub,Large
-    }Else If WinActive("ahk_exe studio64.exe") { ;android studio
+    } Else If WinActive("ahk_exe Code.exe") { ;vs code
         Gosub,Large
-    }Else If WinActive("ahk_class MozillaWindowClass") {
+    } Else If WinActive("ahk_exe studio64.exe") { ;android studio
+        Gosub,Large
+    } Else If WinActive("ahk_class MozillaWindowClass") {
         Gosub,Medium
-    }Else If WinActive("ahk_class XLMAIN") { ;excel
+    } Else If WinActive("ahk_class XLMAIN") { ;excel
         Gosub,Fhd
-    }Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
+    } Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
         Gosub,Fhd
-    }Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
+    } Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
         Gosub,Large
-    }Else If WinActive("ahk_exe Explorer.EXE") {
+    } Else If WinActive("ahk_exe Explorer.EXE") {
         Gosub,Small
-    }Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
+    } Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
-    }Else {
+    } Else {
         Gosub,Medium
     }
 }

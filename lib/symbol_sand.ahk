@@ -18,47 +18,47 @@ ViewSandMenu(){
 
 singleQuotation:
     SymbolSandwich("'","'")
-Return
+    Return
 
 doubleQuotation:
     SymbolSandwich("""","""")
-Return
+    Return
 
 roundBrackets:
     SymbolSandwich("(",")")
-Return
+    Return
 
 curlyBrackets:
-SymbolSandwich("{","}")
-Return
+    SymbolSandwich("{","}")
+    Return
 
 squareBrackets:
     SymbolSandwich("[","]")
-Return
+    Return
 
 hash:
     SymbolSandwich("#","#")
-Return
+    Return
 
 percent:
     SymbolSandwich("%","%")
-Return
+    Return
 
 kagiKakko:
     SymbolSandwich("「","」")
-Return
+    Return
 
 sumiKakko:
     SymbolSandwich("【","】")
-Return
+    Return
 
 arrow:
     SymbolSandwich("<",">")
-Return
+    Return
 
 kbd:
     SymbolSandwich("<kbd>","</kbd>")
-Return
+    Return
 
 anyChar:
     CoordMode,Caret,Screen
@@ -67,7 +67,7 @@ anyChar:
         ary := StrSplit(val, ",")
         ary.Length() = 2 ? SymbolSandwich(ary[1],ary[2]) : SymbolSandwich(val,val)
     }
-Return
+    Return
 
 SymbolSandwich(p1,p2){
     saveClip := Clipboard

@@ -1,11 +1,12 @@
 keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
-    keyWait,% key,T0.3
+    keyWait,% key,T0.5
     if (ErrorLevel = 1) {
         proc.call()
     }
 }
 
 keyRenda(proc, parms){
+    OutputDebug, % A_PriorHotKey A_ThisHotKey
     If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 250) {
         proc.call(parms)
     }
@@ -22,6 +23,7 @@ AhkReload(){
     ToolTip, % "Reload"
     SetTimer, reloadLabel, 1000
 }
+
 reloadLabel:
     Reload
     tooltip
