@@ -19,10 +19,9 @@ Critical
 #SingleInstance,Force
 ListLines, Off
 SendMode input
-; SendMode play
 SetKeyDelay, -1
-SetWinDelay, -1
-SetMouseDelay, -1
+; SetWinDelay, -1
+; SetMouseDelay, -1
 SetBatchLines, -1
 SetTitleMatchMode, 2
 SysGet, MonitorPrimary, MonitorPrimary
@@ -50,8 +49,8 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ; コンテキストメニュー表示
 ~VK1D & r::Send,+{F10}
 
-; ~VK1C Up::keyRenda(Func("IME_SET"), 1)
-; ~VK1D Up::keyRenda(Func("IME_SET"), 0)
+~VK1C::keyRenda(Func("IME_SET"), 1)
+~VK1D::keyRenda(Func("IME_SET"), 0)
 
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
@@ -108,7 +107,7 @@ Return
 ~VK1C & sc028::MouseCursorMove("right") ; :
 ~VK1C & @::MouseCursorMove("up")
 ~VK1C & /::MouseCursorMove("down")
-~VK1D::keyNagaoshi("VK1D",Func("MouseCursorMoveAppCenter"))
+~VK1D & b::MouseCursorMoveAppCenter()
 
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
