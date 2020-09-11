@@ -32,6 +32,6 @@ RunTrans(baseUrl){
 
 StringPast(string){
     Clipboard := string
-    SetKeyDelay, 100
+    SetKeyDelay, 10
     SendEvent, ^v
 }

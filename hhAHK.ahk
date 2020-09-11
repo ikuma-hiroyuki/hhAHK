@@ -34,13 +34,12 @@ deeplTrans := "https://www.deepl.com/translator#"
 googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 
-; #Include, %A_ScriptDir%\lib\IME.ahk
+#Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
 #Include, %A_ScriptDir%\lib\mouse_controller.ahk
 #Include, %A_ScriptDir%\lib\string_controller.ahk
 #Include, %A_ScriptDir%\lib\window_controller.ahk
-
 
 ~VK1C & 0::AhkReload()
 ~VK1C & 9::AhkExit()
@@ -64,7 +63,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
     }Else{
         RunTrans(deeplTrans)
     }
-    Return
+Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 ~VK1D & 1::WinMinimize,A
@@ -80,7 +79,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
     }Else{
         AutoWinReSize()
     }
-    Return
+Return
 
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
@@ -157,7 +156,7 @@ VK1D & WheelDown::Sendevent,{down}
     }else{
         Gosub,squareBrackets
     }
-    Return
+Return
 
 #IFWinActive ahk_exe Explorer.EXE
     F1::send,!vsf
