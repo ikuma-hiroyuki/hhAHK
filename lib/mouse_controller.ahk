@@ -16,7 +16,6 @@ MouseCursorMove(direction){
             y:=mouseSpeed
     }
     If GetKeyState("shift"){
-        OutputDebug ok
         cursorSpeed := 10
         x *= cursorSpeed
         y *= cursorSpeed

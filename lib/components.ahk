@@ -6,7 +6,6 @@ keyNagaoshi(key, proc){ ; keyは文字列で渡す procはFunc関数で渡す
 }
 
 keyRenda(proc, parms){
-    OutputDebug, % A_PriorHotKey A_ThisHotKey
     If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 250) {
         proc.call(parms)
     }

@@ -22,7 +22,7 @@ SendMode input
 SetKeyDelay, -1
 ; SetWinDelay, -1
 ; SetMouseDelay, -1
-SetBatchLines, -1
+; SetBatchLines, -1
 SetTitleMatchMode, 2
 SysGet, MonitorPrimary, MonitorPrimary
 SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
@@ -58,9 +58,9 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1D & a::run,% amazonSerch GetSelectionString()
 ~VK1D & t::
     if GetKeyState("ctrl"){
-        RunTrans(googleTrans)
-    }Else{
         RunTrans(deeplTrans)
+    }Else{
+        RunTrans(googleTrans)
     }
 Return
 
@@ -69,7 +69,7 @@ Return
 ~VK1D & 4::WindowClose()
 
 ; アクティブウィンドウを常に全面にする
-#g::WinOnTop()
+#t::WinOnTop()
 
 ; ウィンドウサイズ変更
 ~VK1D & w Up::
