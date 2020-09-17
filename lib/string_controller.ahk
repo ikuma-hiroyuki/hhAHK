@@ -34,5 +34,5 @@ StringPast(string){
     Clipboard := string
     SetKeyDelay, 10
     SendEvent, ^v
-    sleep 10
+    sleep 30
 }
