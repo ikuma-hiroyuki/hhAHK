@@ -20,9 +20,6 @@ Critical
 ListLines, Off
 SendMode input
 SetKeyDelay, -1
-; SetWinDelay, -1
-; SetMouseDelay, -1
-; SetBatchLines, -1
 SetTitleMatchMode, 2
 SysGet, MonitorPrimary, MonitorPrimary
 SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
