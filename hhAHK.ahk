@@ -80,12 +80,6 @@ Return
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
 
-; ウィンドウをちょっとずつ移動
-~VK1D & Left::WindowMove("left")
-~VK1D & Right::WindowMove("right")
-~VK1D & Up::WindowMove("up")
-~VK1D & Down::WindowMove("down")
-
 ~VK1C & d::WinActivate, % "Dynalist"
 
 ; カーソル移動--------------------------------------------------------------------------------
