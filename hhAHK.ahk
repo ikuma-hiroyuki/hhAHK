@@ -88,8 +88,18 @@ Return
 
 ~VK1C & d::WinActivate, % "Dynalist"
 
+; カーソル移動--------------------------------------------------------------------------------
+~VK1D & sc027::Send,{Blind}{Left}	; ;
+~VK1D & sc028::Send,{Blind}{Right}	; :
+~VK1D & @::Send,{Blind}{Up}
+~VK1D & /::Send,{Blind}{Down}
+~VK1D & l::Send,{Blind}{PgUp}
+~VK1D & .::Send,{Blind}{PgDn}
+~VK1D & k::Send,{Blind}{Home}
+~VK1D & ,::Send,{Blind}{End}
+
 ; キーボードでマウス操作--------------------------------------------------------------------------------
-; カーソル移動
+; マウスカーソル移動
 ~VK1C & sc027::MouseCursorMove("left") ; ;
 ~VK1C & sc028::MouseCursorMove("right") ; :
 ~VK1C & @::MouseCursorMove("up")
