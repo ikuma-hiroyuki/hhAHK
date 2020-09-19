@@ -117,7 +117,7 @@ VK1D & WheelDown::Sendevent,{down}
 !WheelDown::Sendevent,{right}
 
 ; 文字列操作--------------------------------------------------------------------------------
-~VK1D & f::send,{Enter}
+~VK1D & g::send,{Enter}
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
 ; 一行削除
@@ -125,7 +125,7 @@ VK1D & WheelDown::Sendevent,{down}
 ; delete
 ~VK1D & d::Send,{delete}
 ; Backspace
-~VK1D & g::Send,{Backspace}
+~VK1D & f::Send,{Backspace}
 ; 1行選択
 ~VK1D & q::Send,{End}{Home}{Home}+{Down}
 ; 日付出力
