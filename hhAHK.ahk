@@ -98,7 +98,7 @@ Return
 ~VK1C & sc028::MouseCursorMove("right") ; :
 ~VK1C & @::MouseCursorMove("up")
 ~VK1C & /::MouseCursorMove("down")
-~VK1D & b::MouseCursorMoveAppCenter()
+~VK1D & c::MouseCursorMoveAppCenter()
 
 ~VK1C & l::Click,Left
 ~VK1C & r::Click,Right
