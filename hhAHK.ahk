@@ -24,11 +24,12 @@ SetTitleMatchMode, 2
 SysGet, MonitorPrimary, MonitorPrimary
 SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
 
-googlSearch := "https://www.google.com/search?q="
 amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
-googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
+googlSearch := "https://www.google.com/search?q="
+googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
+twitterSerch := "https://twitter.com/search?q="
 
 #Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
@@ -56,6 +57,8 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 ~VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(deeplTrans)
+    }Else if GetKeyState("shift"){
+        run,% twitterSerch GetSelectionString() "&src=typed_query"
     }Else{
         RunTrans(googleTrans)
     }
