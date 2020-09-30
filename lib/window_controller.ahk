@@ -8,7 +8,7 @@ WindowClose(){
 WinOnTop(){
     static toggle := true
     if (toggle = false){ ; ontopを全て解除
-        WinGet, id, list, , , Program Manager
+        WinGet, id
         Loop, % id {
             StringTrimRight, this_id, id%A_Index%, 0
             ; WinGetClass, this_class, ahk_id %this_id%

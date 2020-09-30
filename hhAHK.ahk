@@ -24,7 +24,6 @@ SetTitleMatchMode, 2
 SysGet, MonitorPrimary, MonitorPrimary
 SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
 
-amazonSerch := "https://www.amazon.co.jp/s?k="
 deeplTrans := "https://www.deepl.com/translator#"
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 googlSearch := "https://www.google.com/search?q="
@@ -53,7 +52,6 @@ twitterSerch := "https://twitter.com/search?q="
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
 ~VK1D & s::run,% googlSearch GetSelectionString()
-~VK1D & a::run,% amazonSerch GetSelectionString()
 ~VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(deeplTrans)
@@ -104,7 +102,6 @@ Return
 ~VK1D & c::MouseCursorMoveAppCenter()
 
 ~VK1C & l::Click,Left
-~VK1C & r::Click,Right
 ~VK1C & k::Click,WheelUp
 ~VK1C & j::Click,WheelDown
 
@@ -120,30 +117,32 @@ VK1D & WheelDown::Sendevent,{down}
 !WheelDown::Sendevent,{right}
 
 ; 文字列操作--------------------------------------------------------------------------------
-~VK1D & g::send,{Enter}
+~VK1D & f::send,{Enter}
+~VK1C & space::send,{Enter}
+~VK1D & space::send,{Enter}
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
 ; 一行削除
 ~VK1D & x::Send,{End}{Home}{Home}+{Down}{Delete}
-; delete
+; delete & Backspace
 ~VK1D & d::Send,{delete}
-; Backspace
-~VK1D & f::Send,{Backspace}
+~VK1D & a::Send,{Backspace}
+
 ; 1行選択
 ~VK1D & q::Send,{End}{Home}{Home}+{Down}
 ; 日付出力
 ~VK1C & c::CurrentDate()
 
 ; 記号ペア出力
-~VK1D & M Up::ViewSandMenu()
-~VK1D & 2 Up::Gosub, doubleQuotation
-~VK1D & 3 Up::Gosub, hash
-~VK1D & 7 Up::Gosub, singleQuotation
-~VK1D & 8 Up::Gosub, roundBrackets
-~VK1D & 5 Up::Gosub, percent
-~VK1D & 9 Up::Gosub, kagikakko
-~VK1D & i Up::Gosub, anyChar
-~VK1D & [ Up::
+~VK1D & m::ViewSandMenu()
+~VK1D & 2::Gosub, doubleQuotation
+~VK1D & 3::Gosub, hash
+~VK1D & 5::Gosub, percent
+~VK1D & 7::Gosub, singleQuotation
+~VK1D & 8::Gosub, roundBrackets
+~VK1D & 9::Gosub, kagikakko
+~VK1D & i::Gosub, anyChar
+~VK1D & [::
     if GetKeyState("Shift"){
         Gosub,curlyBrackets
     }else{
