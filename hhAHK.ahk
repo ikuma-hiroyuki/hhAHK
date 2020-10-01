@@ -51,12 +51,12 @@ twitterSerch := "https://twitter.com/search?q="
 
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
-~VK1D & s::run,% googlSearch GetSelectionString()
+~VK1D & s::run,% googlSearch GetSelectionString(true)
 ~VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(deeplTrans)
     }Else if GetKeyState("shift"){
-        run,% twitterSerch GetSelectionString() "&src=typed_query"
+        run,% twitterSerch GetSelectionString(true) "&src=typed_query"
     }Else{
         RunTrans(googleTrans)
     }
