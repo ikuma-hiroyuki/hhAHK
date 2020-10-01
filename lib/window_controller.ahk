@@ -33,6 +33,7 @@ winMoveCenter(){
     x := (A_ScreenWidth / 2) - appWidth
     y := (A_ScreenHeight / 2) - appheight
     WinMove,A,,x,y
+    Reload
 }
 
 WindowMove(direction){
@@ -65,6 +66,7 @@ WindowMove(direction){
 WinResize(width,height){
     WinRestore,A
     WinMove,A,,,,width,height
+    Reload
 }
 
 AutoWinReSize(){
