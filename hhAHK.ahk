@@ -81,7 +81,9 @@ Return
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
 
+; アプリ選択
 ~VK1C & d::WinActivate, % "Dynalist"
+~VK1C & v::WinActivate, % "Visual Studio Code"
 
 ; カーソル移動--------------------------------------------------------------------------------
 ~VK1D & sc027::Send,{Blind}{Left}	; ;
