@@ -1,6 +1,6 @@
 GetSelectionString(urlEncode := false){
     Clipboard := ""
-    SendEvent,^c
+    SendEvent,^{Insert}
     ClipWait,0.5
     selectionStr := Clipboard
     if urlEncode {
@@ -33,6 +33,6 @@ RunTrans(baseUrl){
 StringPast(string){
     Clipboard := string
     SetKeyDelay, 10
-    SendEvent, ^v
+    SendEvent, +{Insert}
     sleep 30
 }
