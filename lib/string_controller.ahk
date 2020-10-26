@@ -14,8 +14,9 @@ GetSelectionString(urlEncode := false){
 
 RunTrans(baseUrl){
     if instr(baseUrl, "translate.google.com") > 0 {
-        waei := "ja&text="
-        eiwa := "en&text="
+        ; waei := "ja&text="
+        waei := "sl=en&tl=ja&text="
+        eiwa := "sl=ja&tl=en&text="
     } else if instr(baseUrl, "deepl.com") > 0 {
         waei := "en/ja/"
         eiwa := "ja/en/"

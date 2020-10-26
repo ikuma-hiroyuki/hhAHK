@@ -27,7 +27,7 @@ SysGet, MonitorWorkArea, MonitorWorkArea, % MonitorPrimary
 deeplTrans := "https://www.deepl.com/translator#"
 everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 googlSearch := "https://www.google.com/search?q="
-googleTrans := "https://translate.google.com/#view=home&op=translate&sl=auto&tl="
+googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
 
 #Include, %A_ScriptDir%\lib\IME.ahk
