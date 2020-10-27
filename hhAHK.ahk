@@ -29,6 +29,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 googlSearch := "https://www.google.com/search?q="
 googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
+quora := "quora.com/search?q="
 
 #Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
@@ -52,6 +53,14 @@ twitterSerch := "https://twitter.com/search?q="
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
 ~VK1D & s::run,% googlSearch GetSelectionString(true)
+~VK1D & q::
+    if GetKeyState("ctrl"){
+        run,% "https://" quora GetSelectionString(true)
+    } else {
+        run,% "https://jp." quora GetSelectionString(true)
+    }
+Return
+
 ~VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(deeplTrans)
@@ -131,8 +140,6 @@ VK1D & WheelDown::Sendevent,{down}
 ~VK1D & d::Send,{delete}
 ~VK1D & a::Send,{Backspace}
 
-; 1行選択
-~VK1D & q::Send,{End}{Home}{Home}+{Down}
 ; 日付出力
 ~VK1C & c::CurrentDate()
 
