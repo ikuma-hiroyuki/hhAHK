@@ -132,6 +132,8 @@ VK1D & WheelDown::Sendevent,{down}
 ~VK1D & j::send,{Enter}
 ~VK1C & space::send,{Enter}
 ~VK1D & space::send,{Enter}
+~VK1D & ~VK1C::send,{Enter}
+
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
 ; 一行削除
