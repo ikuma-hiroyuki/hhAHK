@@ -30,6 +30,7 @@ googlSearch := "https://www.google.com/search?q="
 googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
 quora := "quora.com/search?q="
+duckgo := "https://duckduckgo.com/?q="
 
 #Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
@@ -52,7 +53,14 @@ quora := "quora.com/search?q="
 
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
-~VK1D & s::run,% googlSearch GetSelectionString(true)
+~VK1D & s::
+    if GetKeyState("ctrl"){
+        run,% googlSearch GetSelectionString(true)
+    }else{
+        run,% duckgo GetSelectionString(true)
+    }
+Return
+
 ~VK1D & q::
     if GetKeyState("ctrl"){
         run,% "https://" quora GetSelectionString(true)
