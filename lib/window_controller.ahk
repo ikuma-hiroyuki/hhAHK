@@ -73,6 +73,8 @@ AutoWinReSize(){
     WinGetTitle,winTitle,A
     IF (InStr(winTitle,"chrome") > 0) {
         Gosub,Large
+    } Else IF (InStr(winTitle,"Edge") > 0) {
+        Gosub,Large
     } Else If (InStr(winTitle,"Dynalist")>0) {
         Gosub,Medium
     } Else if (WinActive("ahk_exe dbeaver.exe")) {
