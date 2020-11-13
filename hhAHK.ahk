@@ -55,9 +55,9 @@ duckgo := "https://duckduckgo.com/?q="
 #s::run,% everythingCommand " """ GetSelectionString() """"
 ~VK1D & s::
     if GetKeyState("ctrl"){
-        run,% googlSearch GetSelectionString(true)
-    }else{
         run,% duckgo GetSelectionString(true)
+    }else{
+        run,% googlSearch GetSelectionString(true)
     }
 Return
 
