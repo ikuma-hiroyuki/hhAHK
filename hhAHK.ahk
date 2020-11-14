@@ -101,6 +101,7 @@ Return
 ; アプリ選択
 ~VK1C & d::WinActivate, % "Dynalist"
 ~VK1C & v::WinActivate, % "Visual Studio Code"
+~VK1C & r::WinActivate, % "Android Studio"
 
 ; カーソル移動--------------------------------------------------------------------------------
 ~VK1D & sc027::Send,{Blind}{Left}	; ;
