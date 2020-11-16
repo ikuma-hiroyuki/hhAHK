@@ -98,6 +98,12 @@ Return
 ; ウィンドウを画面中央に移動する
 ~VK1D & e::winMoveCenter()
 
+; ウィンドウを上下左右に移動する
+~VK1C & left::WindowMove("Left")
+~VK1C & right::WindowMove("right")
+~VK1C & up::WindowMove("up")
+~VK1C & down::WindowMove("down")
+
 ; アプリ選択
 ~VK1C & d::WinActivate, % "Dynalist"
 ~VK1C & v::WinActivate, % "Visual Studio Code"
