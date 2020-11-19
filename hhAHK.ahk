@@ -31,6 +31,7 @@ googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
 quora := "quora.com/search?q="
 duckgo := "https://duckduckgo.com/?q="
+eijiro := "https://eow.alc.co.jp/search?q="
 
 #Include, %A_ScriptDir%\lib\IME.ahk
 #Include, %A_ScriptDir%\lib\components.ahk
@@ -72,10 +73,11 @@ Return
 ~VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(deeplTrans)
+        RunTrans(googleTrans)
     }Else if GetKeyState("shift"){
         run,% twitterSerch GetSelectionString(true) "&src=typed_query"
     }Else{
-        RunTrans(googleTrans)
+        RunTrans(eijiro)
     }
 Return
 
