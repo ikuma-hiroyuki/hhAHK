@@ -72,7 +72,6 @@ Return
 
 ~VK1D & t::
     if GetKeyState("ctrl"){
-        RunTrans(deeplTrans)
         RunTrans(googleTrans)
     }Else if GetKeyState("shift"){
         run,% twitterSerch GetSelectionString(true) "&src=typed_query"
