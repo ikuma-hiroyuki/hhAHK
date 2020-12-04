@@ -111,14 +111,14 @@ Return
 ~VK1C & r::WinActivate, % "Android Studio"
 
 ; カーソル移動--------------------------------------------------------------------------------
-~VK1D & sc027::Send,{Blind}{Left}	; ;
-~VK1D & sc028::Send,{Blind}{Right}	; :
-~VK1D & @::Send,{Blind}{Up}
-~VK1D & /::Send,{Blind}{Down}
-~VK1D & l::Send,{Blind}{PgUp}
-~VK1D & .::Send,{Blind}{PgDn}
-~VK1D & k::Send,{Blind}{Home}
-~VK1D & ,::Send,{Blind}{End}
+~VK1D & h::Send,{Blind}{Left}	; ;
+~VK1D & l::Send,{Blind}{Right}	; :
+~VK1D & k::Send,{Blind}{Up}
+~VK1D & j::Send,{Blind}{Down}
+~VK1D & i::Send,{Blind}{PgUp}
+~VK1D & u::Send,{Blind}{PgDn}
+~VK1D & y::Send,{Blind}{Home}
+~VK1D & o::Send,{Blind}{End}
 
 ; キーボードでマウス操作--------------------------------------------------------------------------------
 ; マウスカーソル移動
@@ -145,7 +145,6 @@ VK1D & WheelDown::Sendevent,{down}
 
 ; 文字列操作--------------------------------------------------------------------------------
 ~VK1D & f::send,{Enter}
-~VK1D & j::send,{Enter}
 ~VK1C & space::send,{Enter}
 ~VK1D & space::send,{Enter}
 
@@ -168,7 +167,7 @@ VK1D & WheelDown::Sendevent,{down}
 ~VK1D & 7::Gosub, singleQuotation
 ~VK1D & 8::Gosub, roundBrackets
 ~VK1D & 9::Gosub, kagikakko
-~VK1D & i::Gosub, anyChar
+~VK1D & n::Gosub, anyChar
 ~VK1D & [::
     if GetKeyState("Shift"){
         Gosub,curlyBrackets
