@@ -96,7 +96,7 @@ AutoWinReSize(){
     } Else If WinActive("ahk_exe SearchUI.exe") { ;windows検索
         ; なにもしない
     } Else {
-        Gosub,Medium
+        Gosub,Fhd
     }
 }
 
