@@ -85,10 +85,6 @@ AutoWinReSize(){
         Gosub,Large
     } Else If WinActive("ahk_class MozillaWindowClass") {
         Gosub,Medium
-    } Else If WinActive("ahk_class XLMAIN") { ;excel
-        Gosub,Fhd
-    } Else If WinActive("ahk_class wndclass_desked_gsk") { ;vbe
-        Gosub,Fhd
     } Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
         Gosub,Large
     } Else If WinActive("ahk_exe Explorer.EXE") {
