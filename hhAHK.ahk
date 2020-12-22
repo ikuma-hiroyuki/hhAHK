@@ -76,7 +76,7 @@ VK1D & t::
 Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
-VK1D & 1::WinMinimize,A
+VK1D & m::WinMinimize,A
 VK1D & q::WindowClose()
 
 ; アクティブウィンドウを常に全面にする
@@ -155,7 +155,7 @@ VK1D & a::Send,{Backspace}
 VK1C & c::CurrentDate()
 
 ; 記号ペア出力
-VK1D & m::ViewSandMenu()
+VK1D & ,::ViewSandMenu()
 VK1D & 2::Gosub, doubleQuotation
 VK1D & 3::Gosub, hash
 VK1D & 5::Gosub, percent
