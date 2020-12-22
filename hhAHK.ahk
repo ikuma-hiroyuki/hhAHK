@@ -8,10 +8,8 @@ VK1C = 変換
 VKF2 = かな
 sc027 = ;
 sc028 = :
-sc033 = ,
 */
 
-Critical
 #NoEnv
 #UseHook
 #InstallKeybdHook
