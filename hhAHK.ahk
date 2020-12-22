@@ -65,14 +65,6 @@ VK1D & s::
     }
 Return
 
-VK1D & q::
-    if GetKeyState("ctrl"){
-        run,% "https://" quora GetSelectionString(true)
-    } else {
-        run,% "https://jp." quora GetSelectionString(true)
-    }
-Return
-
 VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(googleTrans)
@@ -85,7 +77,7 @@ Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 VK1D & 1::WinMinimize,A
-VK1D & 4::WindowClose()
+VK1D & q::WindowClose()
 
 ; アクティブウィンドウを常に全面にする
 #t::WinOnTop()
