@@ -75,8 +75,9 @@ Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 #m::WinMinimize,A
-#q::WindowClose()
 VK1D & 1::WinMinimize,A
+#q::WindowClose()
+VK1D & 4::WindowClose()
 #w::send ^w
 
 ; アクティブウィンドウを常に全面にする
