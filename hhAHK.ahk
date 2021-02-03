@@ -69,7 +69,7 @@ VK1D & t::
     }Else if GetKeyState("shift"){
         run,% twitterSerch GetSelectionString(true) "&src=typed_query"
     }Else{
-        RunTrans(eijiro)
+        RunTrans(deeplTrans)
     }
 Return
 
