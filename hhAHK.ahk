@@ -152,7 +152,7 @@ VK1D & x::Send,{End}{Home}{Home}+{Down}{Delete}
 VK1D & d::Send,{delete}
 VK1D & a::Send,{Backspace}
 
-VK1C & u::Send,{Esc}
+VK1C & i::Send,{Esc}
 ; 日付出力
 VK1C & c::CurrentDate()
 
