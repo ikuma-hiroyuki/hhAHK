@@ -142,7 +142,7 @@ VK1D & WheelDown::Sendevent,{down}
 ; 文字列操作--------------------------------------------------------------------------------
 VK1D & f::send,{Enter}
 VK1C & space::send,{Enter}
-VK1D & space::send,{Enter}
+VK1D & shift::send,{Enter}
 
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
