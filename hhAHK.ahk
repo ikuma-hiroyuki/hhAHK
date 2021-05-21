@@ -93,7 +93,7 @@ VK1D & w Up::
 Return
 
 ; ウィンドウを画面中央に移動する
-VK1D & z::winMoveCenter()
+VK1D & e::winMoveCenter()
 
 ; ウィンドウを上下左右に移動する
 VK1C & left::WindowMove("Left")
@@ -142,7 +142,6 @@ VK1D & WheelDown::Sendevent,{down}
 ; 文字列操作--------------------------------------------------------------------------------
 VK1D & f::send,{Enter}
 VK1C & space::send,{Enter}
-VK1D & e::send,{Enter}
 
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
