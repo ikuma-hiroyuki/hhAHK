@@ -24,7 +24,7 @@ WinOnTop(){
 onTopLabel:
     Reload
     tooltip
-    return
+return
 
 winMoveCenter(){
     WinGetPos,x,y,appWidth,appHeight,A
@@ -37,20 +37,20 @@ winMoveCenter(){
 
 WindowMove(direction){
     winMoveSpeed := 25
-    Switch  direction
+    Switch direction
     {
-        case "left":
-            moveX:=-winMoveSpeed
-            moveY:=0
-        case "right":
-            moveX:=winMoveSpeed
-            moveY:=0
-        case "up":
-            moveX:=0
-            moveY:=-winMoveSpeed
-        case "down":
-            moveX:=0
-            moveY:=winMoveSpeed
+    case "left":
+        moveX:=-winMoveSpeed
+        moveY:=0
+    case "right":
+        moveX:=winMoveSpeed
+        moveY:=0
+    case "up":
+        moveX:=0
+        moveY:=-winMoveSpeed
+    case "down":
+        moveX:=0
+        moveY:=winMoveSpeed
     }
     WinGetPos,x,y,,,A
     if GetKeyState("shift"){
@@ -75,7 +75,7 @@ AutoWinReSize(){
         Gosub,Large
     } Else If (InStr(winTitle,"Dynalist")>0) {
         Gosub,Medium
-    } Else if (WinActive("ahk_exe dbeaver.exe")) {
+    } Else if WinActive("ahk_exe dbeaver.exe") {
         Gosub,Large
     } Else If WinActive("ahk_exe Code.exe") { ;vs code
         Gosub,Large
@@ -110,29 +110,29 @@ return ; Auto-execute終了
 
 Small:
     WinResize(900,800)
-    Return
+Return
 
 Medium:
     WinResize(1100,1200)
-    Return
+Return
 
 Tate:
     WinMove,A,,MonitorWorkAreaRight / 4, 0
     WinResize(MonitorWorkAreaRight / 2, MonitorWorkAreaBottom)
-    Return
+Return
 
 Yoko:
     WinResize(MonitorWorkAreaRight / 2, 1000)
-    Return
+Return
 
 Large:
     WinResize(1600,1250)
-    Return
+Return
 
 Fhd:
     WinResize(1920,1080)
-    Return
+Return
 
 YoutubeThumbnail:
     WinResize(1280,720)
-    Return
+Return
