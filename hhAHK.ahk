@@ -107,6 +107,7 @@ VK1C & down::WindowMove("down")
 VK1C & d::WinActivate, % "Dynalist"
 VK1C & v::WinActivate, % "Visual Studio Code"
 VK1C & r::WinActivate, % "Android Studio"
+VK1C & c::WinActivate, % "Chrome"
 
 ; カーソル移動--------------------------------------------------------------------------------
 VK1D & h::Send,{Blind}{Left}	; ;
@@ -155,7 +156,7 @@ VK1D & a::Send,{Backspace}
 
 VK1C & i::Send,{Esc}
 ; 日付出力
-VK1C & c::CurrentDate()
+; VK1C & c::CurrentDate()
 
 ; 記号ペア出力
 VK1D & ,::ViewSandMenu()
