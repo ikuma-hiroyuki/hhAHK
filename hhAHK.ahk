@@ -49,9 +49,11 @@ VK1D & V::Send,#v
 ; コンテキストメニュー表示
 VK1D & r::Send,+{F10}
 
-; #Include, %A_ScriptDir%\lib\IME.ahk
-; VK1C::keyRenda(Func("IME_SET"), 1)
-; VK1D::keyRenda(Func("IME_SET"), 0)
+!Space::
+    Sendevent,!{Space}
+    Sleep, k1
+    IME_SET(0)
+Return
 
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
