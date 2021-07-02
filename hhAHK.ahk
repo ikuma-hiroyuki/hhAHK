@@ -51,7 +51,7 @@ VK1D & r::Send,+{F10}
 
 !Space::
     Sendevent,!{Space}
-    Sleep, 10
+    Sleep, 20
     IME_SET(0)
 Return
 
