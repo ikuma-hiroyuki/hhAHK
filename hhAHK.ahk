@@ -50,6 +50,7 @@ VK1D & V::Send,#v
 VK1D & r::Send,+{F10}
 
 !Space::
+    Sleep, 20
     Sendevent,!{Space}
     Sleep, 20
     IME_SET(0)
