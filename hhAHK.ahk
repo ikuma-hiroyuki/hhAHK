@@ -50,8 +50,9 @@ VK1D & V::Send,#v
 VK1D & r::Send,+{F10}
 
 !Space::
+    Sleep, 10
     Sendevent,!{Space}
-    Send,{VK1D}
+    IME_SET(1)
 Return
 
 ; 検索--------------------------------------------------------------------------------
