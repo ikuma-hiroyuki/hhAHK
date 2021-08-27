@@ -30,6 +30,7 @@ twitterSerch := "https://twitter.com/search?q="
 quora := "quora.com/search?q="
 duckgo := "https://duckduckgo.com/?q="
 eijiro := "https://eow.alc.co.jp/search?q="
+calil := "https://calil.jp/search?q="
 
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
@@ -49,11 +50,13 @@ VK1D & V::Send,#v
 ; コンテキストメニュー表示
 VK1D & r::Send,+{F10}
 
-!Space::
-    Sleep, 10
-    Sendevent,!{Space}
-    IME_SET(1)
-Return
+; Keypirinha用
+; !Space::
+;     SendInput, !{Space}
+;     Sleep, 400
+;     ; Send, {VK1D}
+;     IME_SET(0)
+; Return
 
 ; 検索--------------------------------------------------------------------------------
 #s::run,% everythingCommand " """ GetSelectionString() """"
@@ -73,6 +76,10 @@ VK1D & t::
     }Else{
         RunTrans(deeplTrans)
     }
+Return
+
+VK1D & c::
+    run,% calil GetSelectionString(true)
 Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
@@ -107,7 +114,8 @@ VK1C & down::WindowMove("down")
 VK1C & d::WinActivate, % "Dynalist"
 VK1C & v::WinActivate, % "Visual Studio Code"
 VK1C & r::WinActivate, % "Android Studio"
-VK1C & c::WinActivate, % "Chrome"
+; VK1C & c::WinActivate, % "Chrome"
+VK1C & t::WinActivate, % "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
 
 ; カーソル移動--------------------------------------------------------------------------------
 VK1D & h::Send,{Blind}{Left}	; ;
@@ -125,7 +133,7 @@ VK1C & sc027::MouseCursorMove("left") ; ;
 VK1C & sc028::MouseCursorMove("right") ; :
 VK1C & @::MouseCursorMove("up")
 VK1C & /::MouseCursorMove("down")
-VK1D & c::MouseCursorMoveAppCenter()
+VK1C & c::MouseCursorMoveAppCenter()
 
 VK1C & l::Click,Left
 VK1C & k::Click,WheelUp
