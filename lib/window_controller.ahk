@@ -82,7 +82,7 @@ AutoWinReSize(){
     } Else If WinActive("ahk_exe studio64.exe") { ;android studio
         Gosub,Large
     } Else If WinActive("ahk_class MozillaWindowClass") {
-        Gosub,Medium
+        Gosub,Large
     } Else If WinActive("ahk_exe wdexpress.exe") { ;visual studio
         Gosub,Large
     } Else If WinActive("ahk_exe Explorer.EXE") {
