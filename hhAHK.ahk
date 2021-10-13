@@ -183,10 +183,6 @@ VK1D & [::
     }
 Return
 
-#IFWinActive ahk_exe Explorer.EXE
-    F1::send,!vsf
-#IFWinActive
-
 ; VBE
 #IfWinActive ahk_class wndclass_desked_gsk
     ; & _
@@ -201,13 +197,13 @@ Return
 #IfWinActive
 
 ; CamtasiaStudio
-#IfWinActive ahk_exe CamtasiaStudio.exe
-    ;ステッチ
-    VK1D & s::Send,^!i
+; #IfWinActive ahk_exe CamtasiaStudio.exe
+;     ;ステッチ
+;     VK1D & s::Send,^!i
 
-    ;リップル削除
-    VK1D & d::Send,^{delete}
+;     ;リップル削除
+;     VK1D & d::Send,^{delete}
 
-    ;倍率テキストボックスにフォーカス
-    VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
-#IfWinActive
+;     ;倍率テキストボックスにフォーカス
+;     VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
+; #IfWinActive
