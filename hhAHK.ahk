@@ -27,9 +27,7 @@ everythingCommand := "C:\Program Files\Everything\Everything.exe -s "
 googlSearch := "https://www.google.com/search?q="
 googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
-quora := "quora.com/search?q="
 duckgo := "https://duckduckgo.com/?q="
-eijiro := "https://eow.alc.co.jp/search?q="
 calil := "https://calil.jp/search?q="
 
 #Include, %A_ScriptDir%\lib\components.ahk
