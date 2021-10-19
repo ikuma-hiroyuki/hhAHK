@@ -50,21 +50,13 @@ VK1D & V::Send,#v
 ; コンテキストメニュー表示
 VK1D & r::Send,+{F10}
 
-; Keypirinha用
-; !Space::
-;     SendInput, !{Space}
-;     Sleep, 400
-;     ; Send, {VK1D}
-;     IME_SET(0)
-; Return
-
 ; 検索--------------------------------------------------------------------------------
-#s::run,% everythingCommand " """ GetSelectionString() """"
+#s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
     if GetKeyState("ctrl"){
-        run,% duckgo GetSelectionString(true)
+        Run,% duckgo GetSelectionString(true)
     }else{
-        run,% googlSearch GetSelectionString(true)
+        Run,% googlSearch GetSelectionString(true)
     }
 Return
 
@@ -72,22 +64,20 @@ VK1D & t::
     if GetKeyState("ctrl"){
         RunTrans(googleTrans)
     }Else if GetKeyState("shift"){
-        run,% twitterSerch GetSelectionString(true) "&src=typed_query"
+        Run,% twitterSerch GetSelectionString(true) "&src=typed_query"
     }Else{
         RunTrans(deeplTrans)
     }
 Return
 
 VK1D & c::
-    run,% calil GetSelectionString(true)
+    Run,% calil GetSelectionString(true)
 Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
 #m::WinMinimize,A
 VK1D & 1::WinMinimize,A
-; #q::WindowClose()
 VK1D & 4::WindowClose()
-; #w::send ^w
 
 ; アクティブウィンドウを常に全面にする
 #t::WinOnTop()
@@ -105,21 +95,20 @@ Return
 VK1D & e::winMoveCenter()
 
 ; ウィンドウを上下左右に移動する
-VK1C & left::WindowMove("Left")
-VK1C & right::WindowMove("right")
-VK1C & up::WindowMove("up")
-VK1C & down::WindowMove("down")
+VK1C & Left::WindowMove("Left")
+VK1C & Right::WindowMove("Right")
+VK1C & Up::WindowMove("Up")
+VK1C & Down::WindowMove("Down")
 
 ; アプリ選択
 VK1C & d::WinActivate, % "Dynalist"
 VK1C & v::WinActivate, % "Visual Studio Code"
-VK1C & r::WinActivate, % "Android Studio"
-; VK1C & c::WinActivate, % "Chrome"
+VK1C & e::WinActivate, % "ahk_exe msedge.exe"
 VK1C & t::WinActivate, % "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
 
 ; カーソル移動--------------------------------------------------------------------------------
-VK1D & h::Send,{Blind}{Left}	; ;
-VK1D & l::Send,{Blind}{Right}	; :
+VK1D & h::Send,{Blind}{Left}
+VK1D & l::Send,{Blind}{Right}
 VK1D & k::Send,{Blind}{Up}
 VK1D & j::Send,{Blind}{Down}
 VK1D & i::Send,{Blind}{PgUp}
@@ -129,10 +118,11 @@ VK1D & o::Send,{Blind}{End}
 
 ; キーボードでマウス操作--------------------------------------------------------------------------------
 ; マウスカーソル移動
-VK1C & sc027::MouseCursorMove("left") ; ;
-VK1C & sc028::MouseCursorMove("right") ; :
-VK1C & @::MouseCursorMove("up")
-VK1C & /::MouseCursorMove("down")
+VK1C & sc027::MouseCursorMove("Left") ; ;
+VK1C & sc028::MouseCursorMove("Right") ; :
+VK1C & @::MouseCursorMove("Up")
+VK1C & /::MouseCursorMove("Down")
+VK1D & q::MouseCursorMoveAppCenter()
 VK1C & c::MouseCursorMoveAppCenter()
 
 VK1C & l::Click,Left
@@ -142,17 +132,17 @@ VK1C & j::Click,WheelDown
 ; マウスを拡張--------------------------------------------------------------------------------
 VK1D & RButton::Sendevent,{F2}
 VK1D & LButton::Sendevent,{Enter}
-VK1D & WheelUp::Sendevent,{up}
-VK1D & WheelDown::Sendevent,{down}
+VK1D & WheelUp::Sendevent,{Up}
+VK1D & WheelDown::Sendevent,{Down}
 
 +WheelUp::Sendevent,^{PgUp}
 +WheelDown::Sendevent,^{PgDn}
-!WheelUp::Sendevent,{left}
-!WheelDown::Sendevent,{right}
+!WheelUp::Sendevent,{Left}
+!WheelDown::Sendevent,{Right}
 
 ; 文字列操作--------------------------------------------------------------------------------
-VK1D & f::send,{Enter}
-VK1C & space::send,{Enter}
+VK1D & f::Send,{Enter}
+VK1C & space::Send,{Enter}
 
 ; カーソルが途中でも下に一行挿入
 #Enter::Send,{End}{Enter}
@@ -163,8 +153,6 @@ VK1D & d::Send,{delete}
 VK1D & a::Send,{Backspace}
 
 VK1C & i::Send,{Esc}
-; 日付出力
-; VK1C & c::CurrentDate()
 
 ; 記号ペア出力
 VK1D & ,::ViewSandMenu()
@@ -195,15 +183,3 @@ Return
 #IfWinActive ahk_class VBFloatingPalette
     VK1D & g::Send,^a{Del}{F7}
 #IfWinActive
-
-; CamtasiaStudio
-; #IfWinActive ahk_exe CamtasiaStudio.exe
-;     ;ステッチ
-;     VK1D & s::Send,^!i
-
-;     ;リップル削除
-;     VK1D & d::Send,^{delete}
-
-;     ;倍率テキストボックスにフォーカス
-;     VK1D & g::MouseClick, Left , 2483, 211, 1,0, D
-; #IfWinActive
