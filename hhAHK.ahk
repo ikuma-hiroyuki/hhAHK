@@ -76,6 +76,7 @@ Return
 #m::WinMinimize,A
 VK1D & 1::WinMinimize,A
 VK1D & 4::WindowClose()
+VK1D & z::#z
 
 ; アクティブウィンドウを常に全面にする
 #t::WinOnTop()
