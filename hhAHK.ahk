@@ -78,9 +78,6 @@ VK1D & 1::WinMinimize,A
 VK1D & 4::WindowClose()
 VK1D & z::#z
 
-; アクティブウィンドウを常に全面にする
-#t::WinOnTop()
-
 ; ウィンドウサイズ変更
 VK1D & w Up::
     if GetKeyState("VK1C"){
