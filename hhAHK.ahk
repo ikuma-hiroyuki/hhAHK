@@ -99,8 +99,9 @@ VK1C & Down::WindowMove("Down")
 ; アプリ選択
 VK1C & d::WinActivate, % "Dynalist"
 VK1C & v::WinActivate, % "Visual Studio Code"
-VK1C & e::WinActivate, % "ahk_exe msedge.exe"
-VK1C & t::WinActivate, % "ahk_class CASCADIA_HOSTING_WINDOW_CLASS"
+VK1C & e::WinActivate, % "ahk_class CabinetWClass" ; エクスプローラー
+VK1C & b::WinActivate, % "ahk_exe msedge.exe"
+VK1C & t::WinActivate, % "ahk_class CASCADIA_HOSTING_WINDOW_CLASS" ; ターミナル
 
 ; カーソル移動--------------------------------------------------------------------------------
 VK1D & h::Send,{Blind}{Left}
