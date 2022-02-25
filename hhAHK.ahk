@@ -39,6 +39,13 @@ calil := "https://calil.jp/search?q="
 VK1C::VK1C
 VK1D::VK1D
 
+; Atok英語入力オン
+VK1C & Q::
+    Send,{VK1C}
+    Send,^{F9}
+    Send,i
+Return
+
 VK1C & 0::AhkReload()
 VK1C & 9::AhkExit()
 
