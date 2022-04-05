@@ -175,6 +175,10 @@ VK1D & [::
     }
 Return
 
+#IFWinActive ahk_exe Explorer.EXE
+    F1::send,!vsf
+#IFWinActive
+
 ; VBE
 #IfWinActive ahk_class wndclass_desked_gsk
     ; & _
