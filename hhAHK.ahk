@@ -191,3 +191,9 @@ Return
 #IfWinActive ahk_class VBFloatingPalette
     VK1D & g::Send,^a{Del}{F7}
 #IfWinActive
+
+; Access
+#IfWinActive ahk_exe MSACCESS.EXE
+    ^PgDn::Send,^{F6}
+    ^PgUp::Send,^+{F6}
+#IfWinActive
