@@ -193,7 +193,7 @@ Return
 #IfWinActive
 
 ; Access
-#IfWinActive ahk_exe MSACCESS.EXE
+#IfWinActive ahk_class OMain
     ^PgDn::Send,^{F6}
     ^PgUp::Send,^+{F6}
 #IfWinActive
