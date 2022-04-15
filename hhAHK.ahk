@@ -80,7 +80,6 @@ VK1D & c::
 Return
 
 ; ウィンドウ操作--------------------------------------------------------------------------------
-#m::WinMinimize,A
 VK1D & 1::WinMinimize,A
 VK1D & 4::WindowClose()
 VK1D & z::#z
