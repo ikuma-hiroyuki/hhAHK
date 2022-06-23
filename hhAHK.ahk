@@ -122,6 +122,7 @@ VK1D & q::MouseCursorMoveAppCenter()
 VK1C & c::MouseCursorMoveAppCenter()
 
 VK1C & l::Click,Left
+VK1C & r::Click,Right
 VK1C & k::Click,WheelUp
 VK1C & j::Click,WheelDown
 
