@@ -52,9 +52,9 @@ VK1D & r::Send,+{F10}
 #s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
     if GetKeyState("ctrl"){
-        Run,% duckgo GetSelectionString(true)
-    }else{
         Run,% googlSearch GetSelectionString(true)
+    }else{
+        Run,% duckgo GetSelectionString(true)
     }
 Return
 
