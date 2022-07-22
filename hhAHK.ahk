@@ -1,6 +1,6 @@
 ﻿/*修飾キー
 ^ = Ctrl
-+ = shIft
++ = Shift
 ! = Alt
 # = win
 VK1D = 無変換
@@ -13,7 +13,7 @@ sc028 = :
 #NoEnv
 #UseHook
 #InstallKeybdHook
-#HotkeyModifierTimeout 100
+#HotkeyModIfierTimeout 100
 #SingleInstance,Force
 ListLines, Off
 SendMode input
@@ -42,6 +42,9 @@ VK1D::VK1D
 VK1C & 0::AhkReload()
 VK1C & 9::AhkExit()
 
+; HuntAndPeck-1.6の実行
+VK1D & Space:: Run,% "C:\HuntAndPeck-1.6\hap.exe /hint"
+
 ; クリップボード履歴
 VK1D & V::Send,#v
 
@@ -51,7 +54,7 @@ VK1D & r::Send,+{F10}
 ; 検索--------------------------------------------------------------------------------
 #s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
-    if GetKeyState("ctrl"){
+    If GetKeyState("ctrl"){
         Run,% googlSearch GetSelectionString(true)
     }else{
         Run,% duckgo GetSelectionString(true)
@@ -59,9 +62,9 @@ VK1D & s::
 Return
 
 VK1D & t::
-    if GetKeyState("ctrl"){
+    If GetKeyState("ctrl"){
         RunTrans(googleTrans)
-    }Else if GetKeyState("shift"){
+    }Else If GetKeyState("Shift"){
         Run,% twitterSerch GetSelectionString(true) "&src=typed_query"
     }Else{
         RunTrans(deeplTrans)
@@ -79,7 +82,7 @@ VK1D & z::#z
 
 ; ウィンドウサイズ変更
 VK1D & w Up::
-    if GetKeyState("VK1C"){
+    If GetKeyState("VK1C"){
         ViewWinsizeMenu()
     }Else{
         AutoWinReSize()
@@ -161,16 +164,16 @@ VK1D & 8::Gosub, roundBrackets
 VK1D & 9::Gosub, kagikakko
 VK1D & n::Gosub, anyChar
 VK1D & [::
-    if GetKeyState("Shift"){
+    If GetKeyState("Shift"){
         Gosub,curlyBrackets
     }else{
         Gosub,squareBrackets
     }
 Return
 
-#IFWinActive ahk_exe Explorer.EXE
+#IfWinActive ahk_exe Explorer.EXE
     F1::send,!vsf
-#IFWinActive
+#IfWinActive
 
 ; VBE
 #IfWinActive ahk_class wndclass_desked_gsk
