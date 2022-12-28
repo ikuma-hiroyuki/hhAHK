@@ -43,7 +43,7 @@ VK1C & 0::AhkReload()
 VK1C & 9::AhkExit()
 
 ; HuntAndPeck-1.6の実行
-VK1D & Space:: Run,% "C:\HuntAndPeck-1.6\hap.exe /hint"
+; VK1D & Space:: Run,% "C:\HuntAndPeck-1.6\hap.exe /hint"
 
 ; クリップボード履歴
 VK1D & V::Send,#v
@@ -55,9 +55,9 @@ VK1D & r::Send,+{F10}
 #s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
     If GetKeyState("ctrl"){
-        Run,% googlSearch GetSelectionString(true)
-    }else{
         Run,% duckgo GetSelectionString(true)
+    }else{
+        Run,% googlSearch GetSelectionString(true)
     }
 Return
 
