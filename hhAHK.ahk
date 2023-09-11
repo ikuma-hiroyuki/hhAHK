@@ -29,6 +29,7 @@ googleTrans := "https://translate.google.com/#view=home&op=translate&"
 twitterSerch := "https://twitter.com/search?q="
 duckgo := "https://duckduckgo.com/?q="
 calil := "https://calil.jp/search?q="
+bing := "https://www.bing.com/search?q="
 
 #Include, %A_ScriptDir%\lib\components.ahk
 #Include, %A_ScriptDir%\lib\symbol_sand.ahk
@@ -55,9 +56,9 @@ VK1D & r::Send,+{F10}
 #s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
     If GetKeyState("ctrl"){
-        Run,% duckgo GetSelectionString(true)
-    }else{
         Run,% googlSearch GetSelectionString(true)
+    }else{
+        Run,% bing GetSelectionString(true)
     }
 Return
 
