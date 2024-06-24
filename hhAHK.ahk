@@ -56,9 +56,9 @@ VK1D & r::Send,+{F10}
 #s::Run,% everythingCommand " """ GetSelectionString() """"
 VK1D & s::
     If GetKeyState("ctrl"){
-        Run,% googlSearch GetSelectionString(true)
-    }else{
         Run,% bing GetSelectionString(true)
+    }else{
+        Run,% googlSearch GetSelectionString(true)
     }
 Return
 
