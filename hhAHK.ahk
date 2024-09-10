@@ -59,7 +59,7 @@ VK1D & s::
     If GetKeyState("ctrl"){
         Run,% duckgo GetSelectionString(true)
     }else{
-        Run,% perplexity GetSelectionString(true)
+        Run,% perplexity GetSelectionString(true) "&copilot=true"
     }
 Return
 
