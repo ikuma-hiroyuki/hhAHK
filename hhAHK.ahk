@@ -105,7 +105,7 @@ VK1C & d::WinActivate, % "Dynalist"
 VK1C & v::WinActivate, % "Visual Studio Code"
 VK1C & f::WinActivate, % "ahk_class WinUIDesktopWin32WindowClass" ; エクスプローラー
 VK1C & e::WinActivate, % "ahk_class CabinetWClass" ; エクスプローラー
-VK1C & b::WinActivate, % "ahk_exe msedge.exe"
+VK1C & b::WinActivate, % "ahk_exe vivaldi.exe"
 VK1C & t::WinActivate, % "ahk_class CASCADIA_HOSTING_WINDOW_CLASS" ; ターミナル
 VK1C & p::WinActivate, % "ahk_exe pycharm64.exe"
 ; カーソル移動--------------------------------------------------------------------------------
